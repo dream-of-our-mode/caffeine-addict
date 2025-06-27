@@ -1,5 +1,7 @@
 {
   "itemGroup.caffeinemodetab": "Caffeine Addict Mode",
   "advancement.caffeineaddictmode.entering_server.title": "Entering Server",
-  "advancement.caffeineaddictmode.entering_server.desc": "Entering server is the beginning of caffeine addiction."
+  "advancement.caffeineaddictmode.entering_server.desc": "Entering server is the beginning of caffeine addiction.",
+  "tooltip.caffeineaddictmode.quality_desc": "Quality : %s",
+  "tooltip.caffeineaddictmode.barista_desc": "Barista : %s"
 }

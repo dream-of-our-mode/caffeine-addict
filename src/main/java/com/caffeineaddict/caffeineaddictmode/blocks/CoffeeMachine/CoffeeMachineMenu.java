@@ -37,24 +37,29 @@ public class CoffeeMachineMenu extends AbstractContainerMenu {
 
         // Outputs (read-only)
         this.addSlot(new Slot(blockInv, 2, 50, 80) {
-            @Override public boolean mayPlace(ItemStack stack) { return false; }
+            @Override public int getMaxStackSize() {return 1;}
         });
         this.addSlot(new Slot(blockInv, 3, 104, 80) {
-            @Override public boolean mayPlace(ItemStack stack) { return false; }
+            @Override public int getMaxStackSize() {return 1;}
         });
 
         addDataSlots(gaugeData);
 
-        // Add player inventory slots
+        // Add player inventory slots (start at y=140 based on texture)
+        int startX = 8;
+        int startY = 84;
+
         for (int row = 0; row < 3; row++) {
             for (int col = 0; col < 9; col++) {
-                this.addSlot(new Slot(playerInv, col + row * 9 + 9, 8 + col * 18, 84 + row * 18));
+                this.addSlot(new Slot(playerInv, col + row * 9 + 9, startX + col * 18, startY + row * 18));
             }
         }
 
+// Hotbar
         for (int col = 0; col < 9; col++) {
-            this.addSlot(new Slot(playerInv, col, 8 + col * 18, 142));
+            this.addSlot(new Slot(playerInv, col, startX + col * 18, startY + 58));
         }
+
     }
 
     @Override

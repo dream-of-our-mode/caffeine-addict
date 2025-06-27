@@ -22,6 +22,7 @@ public class CoffeeMachineScreen extends AbstractContainerScreen<CoffeeMachineMe
         super(menu, playerInventory, title);
         this.imageWidth = 256;
         this.imageHeight = 256;
+        this.inventoryLabelY = 140 + 6;
     }
 
     @Override
@@ -30,19 +31,21 @@ public class CoffeeMachineScreen extends AbstractContainerScreen<CoffeeMachineMe
         RenderSystem.setShaderTexture(0, GUI);
         int x = (this.width - this.imageWidth) / 2;
         int y = (this.height - this.imageHeight) / 2;
-        this.blit(poseStack, x,y, 0, 0, imageWidth, imageHeight);
+        this.blit(poseStack, x + 40,y + 5, 0, 0, imageWidth*2/3, imageHeight*2/3);
 
         RenderSystem.setShaderTexture(0, PLAYER_INVENTORY_TEXTURE);
-        this.blit(poseStack, x + 8, y + 84, 0, 71, 162, 86);
+        this.blit(poseStack, x + 40, y + 160, 0, 71, 162, 86);
 
         // Draw animated gauge bar for each input slot
         for (int i = 0; i < 2; i++) {
             int fill = menu.getProgressForSlot(i); // progress: 0-24
-            int barWidth = (int)(13 * fill / 25.0); // 13 px max bar height
-            int barX = x + (i == 0 ? 51 : 105);
-            int barY = y + 63;
+            int barWidth = (int)(22 * fill / 25.0); // 13 px max bar height
+            int barX = x + (i == 0 ? 85 : 143);
+            int barY = y + 43;
+            int texU = (i == 0 ? 85 : 143); // Same as barX if drawn from background directly
+            int texV = 43;
             this.blit(poseStack, barX, barY,
-                    176, 0, barWidth, 6); // x, y, u, v, width, height
+                    texU, texV, barWidth, 10); // x, y, u, v, width, height
         }
     }
 

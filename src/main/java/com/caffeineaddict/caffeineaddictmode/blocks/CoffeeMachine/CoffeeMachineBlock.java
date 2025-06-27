@@ -30,8 +30,9 @@ public class CoffeeMachineBlock extends Block implements EntityBlock {
                                  InteractionHand hand, BlockHitResult hit) {
         if (!world.isClientSide) {
             BlockEntity be = world.getBlockEntity(pos);
-            if (be instanceof CoffeeMachineBlockEntity) {
-                NetworkHooks.openScreen((ServerPlayer) player, (CoffeeMachineBlockEntity) be, pos);
+            if (be instanceof CoffeeMachineBlockEntity coffeeMachine) {
+                coffeeMachine.setLastUsedBy(player.getName().getString());
+                NetworkHooks.openScreen((ServerPlayer) player, coffeeMachine, pos);
             }
         }
         return InteractionResult.SUCCESS;
