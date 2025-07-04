@@ -11,4 +11,9 @@ public class ModCreativeTab {
             return new ItemStack(Items.COCOA_BEANS);
         }
     };
+
+    public static final CreativeModeTab TEA_TAB = new CreativeModeTab("tea_tab") {
+        @Override
+        public ItemStack makeIcon() { return new ItemStack(Items.DANDELION); }
+    };
 }

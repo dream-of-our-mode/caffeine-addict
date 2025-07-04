@@ -75,14 +75,14 @@ public class CaffeineAddictMode {
     private void commonSetup(final FMLCommonSetupEvent event) {
         event.enqueueWork(PacketHandler::register);
     }
-    private void clientSetup(final FMLClientSetupEvent event) {
-        event.enqueueWork(() -> {
-            net.minecraft.client.gui.screens.MenuScreens.register(
-                    com.caffeineaddict.caffeineaddictmode.menu.ModMenuTypes.GRINDER_MENU.get(),
-                    com.caffeineaddict.caffeineaddictmode.screen.GrinderScreen::new
-            );
-        });
-    }
+//    private void clientSetup(final FMLClientSetupEvent event) {
+//        event.enqueueWork(() -> {
+//            net.minecraft.client.gui.screens.MenuScreens.register(
+//                    com.caffeineaddict.caffeineaddictmode.menu.ModMenuTypes.GRINDER_MENU.get(),
+//                    com.caffeineaddict.caffeineaddictmode.screen.GrinderScreen::new
+//            );
+//        });
+//    }
 
     @Mod.EventBusSubscriber(modid = CaffeineAddictMode.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
     public class ClientModEvents {
@@ -90,6 +90,7 @@ public class CaffeineAddictMode {
         public static void onClientSetup(final FMLClientSetupEvent event) {
             event.enqueueWork(() -> {
                 MenuScreens.register(ModMenus.WATER_DISPENSER.get(), WaterDispenserScreen::new);
+                MenuScreens.register(ModMenuTypes.GRINDER_MENU.get(), GrinderScreen::new);
             });
         }
     }

@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    { "item": "caffeineaddictmode:dried_white_tulip_leaf" },
+    { "item": "caffeineaddictmode:hot_water" },
+    { "item": "caffeineaddictmode:cup" }
+  ],
+  "result": {
+    "item": "caffeineaddictmode:white_tulip_tea"
+  }
+}

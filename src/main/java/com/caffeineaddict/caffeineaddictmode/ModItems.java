@@ -179,4 +179,131 @@ public class ModItems {
     public static void register() {
         ITEMS.register(FMLJavaModLoadingContext.get().getModEventBus());
     }
+
+    /**
+     * dried tea leaf
+     */
+    public static final RegistryObject<Item> DRIED_DANDELION_LEAF =
+            ITEMS.register("dried_dandelion_leaf", () ->
+                    new Item(new Item.Properties().tab(ModCreativeTab.TEA_TAB)));
+
+    public static final RegistryObject<Item> DRIED_BlUE_ORCHID_LEAF =
+            ITEMS.register("dried_blue_orchid_leaf", () ->
+                    new Item(new Item.Properties().tab(ModCreativeTab.TEA_TAB)));
+
+    public static final RegistryObject<Item> DRIED_ALLIUM_LEAF =
+            ITEMS.register("dried_allium_leaf", () ->
+                    new Item(new Item.Properties().tab(ModCreativeTab.TEA_TAB)));
+
+    public static final RegistryObject<Item> DRIED_AZURE_BLUET_LEAF =
+            ITEMS.register("dried_azure_bluet_leaf", () ->
+                    new Item(new Item.Properties().tab(ModCreativeTab.TEA_TAB)));
+
+    public static final RegistryObject<Item> DRIED_RED_TULIP_LEAF =
+            ITEMS.register("dried_red_tulip_leaf", () ->
+                    new Item(new Item.Properties().tab(ModCreativeTab.TEA_TAB)));
+
+    public static final RegistryObject<Item> DRIED_ORANGE_TULIP_LEAF =
+            ITEMS.register("dried_orange_tulip_leaf", () ->
+                    new Item(new Item.Properties().tab(ModCreativeTab.TEA_TAB)));
+
+    public static final RegistryObject<Item> DRIED_WHITE_TULIP_LEAF =
+            ITEMS.register("dried_white_tulip_leaf", () ->
+                    new Item(new Item.Properties().tab(ModCreativeTab.TEA_TAB)));
+
+    public static final RegistryObject<Item> DRIED_PINK_TULIP_LEAF =
+            ITEMS.register("dried_pink_tulip_leaf", () ->
+                    new Item(new Item.Properties().tab(ModCreativeTab.TEA_TAB)));
+
+    public static final RegistryObject<Item> DRIED_OXEYE_DAISY_LEAF =
+            ITEMS.register("dried_oxeye_daisy_leaf", () ->
+                    new Item(new Item.Properties().tab(ModCreativeTab.TEA_TAB)));
+
+    public static final RegistryObject<Item> DRIED_CORNFLOWER_LEAF =
+            ITEMS.register("dried_cornflower_leaf", () ->
+                    new Item(new Item.Properties().tab(ModCreativeTab.TEA_TAB)));
+
+    public static final RegistryObject<Item> DRIED_SUNFLOWER_LEAF =
+            ITEMS.register("dried_sunflower_leaf", () ->
+                    new Item(new Item.Properties().tab(ModCreativeTab.TEA_TAB)));
+
+    public static final RegistryObject<Item> DRIED_LILAC_LEAF =
+            ITEMS.register("dried_lilac_leaf", () ->
+                    new Item(new Item.Properties().tab(ModCreativeTab.TEA_TAB)));
+
+    public static final RegistryObject<Item> DRIED_ROSE_BUSH_LEAF =
+            ITEMS.register("dried_rose_leaf", () ->
+                    new Item(new Item.Properties().tab(ModCreativeTab.TEA_TAB)));
+
+    public static final RegistryObject<Item> DRIED_PEONY_LEAF =
+            ITEMS.register("dried_peony_leaf", () ->
+                    new Item(new Item.Properties().tab(ModCreativeTab.TEA_TAB)));
+
+    /**
+     * tea
+     */
+    public class ModTea {
+        public static final FoodProperties RELAXING_TEA = new FoodProperties.Builder()
+                .nutrition(1)
+                .saturationMod(0.3F)
+                .effect(() -> new MobEffectInstance(MobEffects.REGENERATION, 200, 0), 1.0F) // 효과, 시간, 레벨
+                .effect(() -> new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 100, 0), 1.0F) // 릴렉스 느낌
+                .build();
+    }
+
+    public static final RegistryObject<Item> DANDELION_TEA =
+            ITEMS.register("dandelion_tea", () ->
+                    new Item(new Item.Properties().tab(ModCreativeTab.TEA_TAB).food(ModTea.RELAXING_TEA)));
+
+    public static final RegistryObject<Item> BlUE_ORCHID_TEA =
+            ITEMS.register("blue_orchid_tea", () ->
+                    new Item(new Item.Properties().tab(ModCreativeTab.TEA_TAB).food(ModTea.RELAXING_TEA)));
+
+    public static final RegistryObject<Item> ALLIUM_TEA =
+            ITEMS.register("allium_tea", () ->
+                    new Item(new Item.Properties().tab(ModCreativeTab.TEA_TAB).food(ModTea.RELAXING_TEA)));
+
+    public static final RegistryObject<Item> AZURE_BLUET_TEA =
+            ITEMS.register("azure_bluet_tea", () ->
+                    new Item(new Item.Properties().tab(ModCreativeTab.TEA_TAB).food(ModTea.RELAXING_TEA)));
+
+    public static final RegistryObject<Item> RED_TULIP_TEA =
+            ITEMS.register("red_tulip_tea", () ->
+                    new Item(new Item.Properties().tab(ModCreativeTab.TEA_TAB).food(ModTea.RELAXING_TEA)));
+
+    public static final RegistryObject<Item> ORANGE_TULIP_TEA =
+            ITEMS.register("orange_tulip_tea", () ->
+                    new Item(new Item.Properties().tab(ModCreativeTab.TEA_TAB).food(ModTea.RELAXING_TEA)));
+
+    public static final RegistryObject<Item> WHITE_TULIP_TEA =
+            ITEMS.register("white_tulip_tea", () ->
+                    new Item(new Item.Properties().tab(ModCreativeTab.TEA_TAB).food(ModTea.RELAXING_TEA)));
+
+    public static final RegistryObject<Item> PINK_TULIP_TEA =
+            ITEMS.register("pink_tulip_tea", () ->
+                    new Item(new Item.Properties().tab(ModCreativeTab.TEA_TAB).food(ModTea.RELAXING_TEA)));
+
+    public static final RegistryObject<Item> OXEYE_DAISY_TEA =
+            ITEMS.register("oxeye_daisy_tea", () ->
+                    new Item(new Item.Properties().tab(ModCreativeTab.TEA_TAB).food(ModTea.RELAXING_TEA)));
+
+    public static final RegistryObject<Item> CORNFLOWER_TEA =
+            ITEMS.register("cornflower_tea", () ->
+                    new Item(new Item.Properties().tab(ModCreativeTab.TEA_TAB).food(ModTea.RELAXING_TEA)));
+
+    public static final RegistryObject<Item> SUNFLOWER_TEA =
+            ITEMS.register("sunflower_tea", () ->
+                    new Item(new Item.Properties().tab(ModCreativeTab.TEA_TAB).food(ModTea.RELAXING_TEA)));
+
+    public static final RegistryObject<Item> LILAC_TEA =
+            ITEMS.register("lilac_tea", () ->
+                    new Item(new Item.Properties().tab(ModCreativeTab.TEA_TAB).food(ModTea.RELAXING_TEA)));
+
+    public static final RegistryObject<Item> ROSE_TEA =
+            ITEMS.register("rose_tea", () ->
+                    new Item(new Item.Properties().tab(ModCreativeTab.TEA_TAB).food(ModTea.RELAXING_TEA)));
+
+    public static final RegistryObject<Item> PEONY_TEA =
+            ITEMS.register("peony_tea", () ->
+                    new Item(new Item.Properties().tab(ModCreativeTab.TEA_TAB).food(ModTea.RELAXING_TEA)));
 }
