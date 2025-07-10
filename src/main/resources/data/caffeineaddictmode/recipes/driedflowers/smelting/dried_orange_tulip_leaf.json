@@ -1,9 +1,0 @@
-{
-  "type": "minecraft:smelting",
-  "ingredient": {
-    "item": "minecraft:orange_tulip"
-  },
-  "result": "caffeineaddictmode:dried_orange_tulip_leaf",
-  "experience": 0.1,
-  "cookingtime": 200
-}

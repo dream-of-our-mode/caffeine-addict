@@ -1,11 +1,11 @@
 {
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
-    { "item": "caffeineaddictmode:dried_sunflower_leaf" },
+    { "item": "caffeineaddictmode:dried_fern_leaf" },
     { "item": "caffeineaddictmode:hot_water" },
     { "item": "caffeineaddictmode:cup" }
   ],
   "result": {
-    "item": "caffeineaddictmode:sunflower_tea"
+    "item": "caffeineaddictmode:fern_tea"
   }
 }

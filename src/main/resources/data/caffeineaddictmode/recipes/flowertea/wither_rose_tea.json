@@ -1,11 +1,11 @@
 {
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
-    { "item": "caffeineaddictmode:dried_red_tulip_leaf" },
+    { "item": "caffeineaddictmode:dried_wither_rose_leaf" },
     { "item": "caffeineaddictmode:hot_water" },
     { "item": "caffeineaddictmode:cup" }
   ],
   "result": {
-    "item": "caffeineaddictmode:red_tulip_tea"
+    "item": "caffeineaddictmode:wither_rose_tea"
   }
 }

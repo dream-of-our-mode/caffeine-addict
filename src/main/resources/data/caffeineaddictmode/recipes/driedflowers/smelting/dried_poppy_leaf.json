@@ -1,9 +1,9 @@
 {
   "type": "minecraft:smelting",
   "ingredient": {
-    "item": "minecraft:red_tulip"
+    "item": "minecraft:poppy"
   },
-  "result": "caffeineaddictmode:dried_red_tulip_leaf",
+  "result": "caffeineaddictmode:dried_poppy_leaf",
   "experience": 0.1,
   "cookingtime": 200
 }

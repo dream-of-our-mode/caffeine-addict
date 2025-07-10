@@ -3,7 +3,9 @@ package com.caffeineaddict.caffeineaddictmode;
 import com.caffeineaddict.caffeineaddictmode.CaffeineAddictMode;
 import net.minecraft.world.item.CreativeModeTab;
 import com.caffeineaddict.caffeineaddictmode.registry.ModBlocks;
+
 import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.BlockItem;
@@ -14,6 +16,9 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
+
+import javax.annotation.Nullable;
+
 
 public class ModItems {
     public static final String MOD_ID = CaffeineAddictMode.MOD_ID;
@@ -187,10 +192,6 @@ public class ModItems {
             ITEMS.register("dried_dandelion_leaf", () ->
                     new Item(new Item.Properties().tab(ModCreativeTab.TEA_TAB)));
 
-    public static final RegistryObject<Item> DRIED_BlUE_ORCHID_LEAF =
-            ITEMS.register("dried_blue_orchid_leaf", () ->
-                    new Item(new Item.Properties().tab(ModCreativeTab.TEA_TAB)));
-
     public static final RegistryObject<Item> DRIED_ALLIUM_LEAF =
             ITEMS.register("dried_allium_leaf", () ->
                     new Item(new Item.Properties().tab(ModCreativeTab.TEA_TAB)));
@@ -199,111 +200,120 @@ public class ModItems {
             ITEMS.register("dried_azure_bluet_leaf", () ->
                     new Item(new Item.Properties().tab(ModCreativeTab.TEA_TAB)));
 
-    public static final RegistryObject<Item> DRIED_RED_TULIP_LEAF =
-            ITEMS.register("dried_red_tulip_leaf", () ->
-                    new Item(new Item.Properties().tab(ModCreativeTab.TEA_TAB)));
-
-    public static final RegistryObject<Item> DRIED_ORANGE_TULIP_LEAF =
-            ITEMS.register("dried_orange_tulip_leaf", () ->
-                    new Item(new Item.Properties().tab(ModCreativeTab.TEA_TAB)));
-
-    public static final RegistryObject<Item> DRIED_WHITE_TULIP_LEAF =
-            ITEMS.register("dried_white_tulip_leaf", () ->
-                    new Item(new Item.Properties().tab(ModCreativeTab.TEA_TAB)));
-
-    public static final RegistryObject<Item> DRIED_PINK_TULIP_LEAF =
-            ITEMS.register("dried_pink_tulip_leaf", () ->
-                    new Item(new Item.Properties().tab(ModCreativeTab.TEA_TAB)));
-
-    public static final RegistryObject<Item> DRIED_OXEYE_DAISY_LEAF =
-            ITEMS.register("dried_oxeye_daisy_leaf", () ->
-                    new Item(new Item.Properties().tab(ModCreativeTab.TEA_TAB)));
-
     public static final RegistryObject<Item> DRIED_CORNFLOWER_LEAF =
             ITEMS.register("dried_cornflower_leaf", () ->
                     new Item(new Item.Properties().tab(ModCreativeTab.TEA_TAB)));
 
-    public static final RegistryObject<Item> DRIED_SUNFLOWER_LEAF =
-            ITEMS.register("dried_sunflower_leaf", () ->
+    public static final RegistryObject<Item> DRIED_POPPY_LEAF =
+            ITEMS.register("dried_poppy_leaf", () ->
                     new Item(new Item.Properties().tab(ModCreativeTab.TEA_TAB)));
 
-    public static final RegistryObject<Item> DRIED_LILAC_LEAF =
-            ITEMS.register("dried_lilac_leaf", () ->
+    public static final RegistryObject<Item> DRIED_WITHER_ROSE_LEAF =
+            ITEMS.register("dried_wither_rose_leaf", () ->
                     new Item(new Item.Properties().tab(ModCreativeTab.TEA_TAB)));
 
-    public static final RegistryObject<Item> DRIED_ROSE_BUSH_LEAF =
-            ITEMS.register("dried_rose_leaf", () ->
+    public static final RegistryObject<Item> DRIED_FERN_LEAF =
+            ITEMS.register("dried_fern_leaf", () ->
                     new Item(new Item.Properties().tab(ModCreativeTab.TEA_TAB)));
 
-    public static final RegistryObject<Item> DRIED_PEONY_LEAF =
-            ITEMS.register("dried_peony_leaf", () ->
+    public static final RegistryObject<Item> DRIED_WARPED_ROOTS_LEAF =
+            ITEMS.register("dried_warped_roots_leaf", () ->
                     new Item(new Item.Properties().tab(ModCreativeTab.TEA_TAB)));
 
     /**
      * tea
      */
     public class ModTea {
-        public static final FoodProperties RELAXING_TEA = new FoodProperties.Builder()
-                .nutrition(1)
-                .saturationMod(0.3F)
-                .effect(() -> new MobEffectInstance(MobEffects.REGENERATION, 200, 0), 1.0F) // 효과, 시간, 레벨
-                .effect(() -> new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 100, 0), 1.0F) // 릴렉스 느낌
-                .build();
+        // goodEffect 별도 지정 x (기본 적용: 화염저항 60초)
+        public static FoodProperties createTeaEffect(
+            MobEffect badEffect, int badDuration, int badAmplifier) {
+                return createTeaEffect(
+                    MobEffects.FIRE_RESISTANCE, 1200, 0,
+                    badEffect, badDuration, badAmplifier
+            );
+        }
+        // goodEffect 직접 지정
+        public static FoodProperties createTeaEffect(
+            MobEffect goodEffect, int goodDuration, int goodAmplifier,
+            MobEffect badEffect, int badDuration, int badAmplifier) {
+                return new FoodProperties.Builder()
+                    .nutrition(1)
+                    .saturationMod(0.3F)
+                    .effect(() -> new MobEffectInstance(goodEffect, goodDuration, goodAmplifier), 1.0F)
+                    .effect(() -> new MobEffectInstance(badEffect, badDuration, badAmplifier), 1.0F)
+                    .build();
+        }
     }
 
     public static final RegistryObject<Item> DANDELION_TEA =
-            ITEMS.register("dandelion_tea", () ->
-                    new Item(new Item.Properties().tab(ModCreativeTab.TEA_TAB).food(ModTea.RELAXING_TEA)));
+        ITEMS.register("dandelion_tea", () ->
+                new Item(new Item.Properties().tab(ModCreativeTab.TEA_TAB).food(
+                        ModTea.createTeaEffect(
+                                // mining_fatigue(채굴피로)
+                                MobEffects.DIG_SLOWDOWN, 200, 0
+                        )
+                )));
 
-    public static final RegistryObject<Item> BlUE_ORCHID_TEA =
-            ITEMS.register("blue_orchid_tea", () ->
-                    new Item(new Item.Properties().tab(ModCreativeTab.TEA_TAB).food(ModTea.RELAXING_TEA)));
+    public static final RegistryObject<Item> POPPY_TEA =
+            ITEMS.register("poppy_tea", () ->
+                new Item(new Item.Properties().tab(ModCreativeTab.TEA_TAB).food(
+                            ModTea.createTeaEffect(
+                                    // nausea(멀미)
+                                    MobEffects.CONFUSION, 200, 0
+                            )
+                    )));
 
     public static final RegistryObject<Item> ALLIUM_TEA =
             ITEMS.register("allium_tea", () ->
-                    new Item(new Item.Properties().tab(ModCreativeTab.TEA_TAB).food(ModTea.RELAXING_TEA)));
+                    new Item(new Item.Properties().tab(ModCreativeTab.TEA_TAB).food(
+                            ModTea.createTeaEffect(
+                                    // 나약함
+                                    MobEffects.WEAKNESS, 400, 0
+                            )
+                    )));
 
     public static final RegistryObject<Item> AZURE_BLUET_TEA =
             ITEMS.register("azure_bluet_tea", () ->
-                    new Item(new Item.Properties().tab(ModCreativeTab.TEA_TAB).food(ModTea.RELAXING_TEA)));
-
-    public static final RegistryObject<Item> RED_TULIP_TEA =
-            ITEMS.register("red_tulip_tea", () ->
-                    new Item(new Item.Properties().tab(ModCreativeTab.TEA_TAB).food(ModTea.RELAXING_TEA)));
-
-    public static final RegistryObject<Item> ORANGE_TULIP_TEA =
-            ITEMS.register("orange_tulip_tea", () ->
-                    new Item(new Item.Properties().tab(ModCreativeTab.TEA_TAB).food(ModTea.RELAXING_TEA)));
-
-    public static final RegistryObject<Item> WHITE_TULIP_TEA =
-            ITEMS.register("white_tulip_tea", () ->
-                    new Item(new Item.Properties().tab(ModCreativeTab.TEA_TAB).food(ModTea.RELAXING_TEA)));
-
-    public static final RegistryObject<Item> PINK_TULIP_TEA =
-            ITEMS.register("pink_tulip_tea", () ->
-                    new Item(new Item.Properties().tab(ModCreativeTab.TEA_TAB).food(ModTea.RELAXING_TEA)));
-
-    public static final RegistryObject<Item> OXEYE_DAISY_TEA =
-            ITEMS.register("oxeye_daisy_tea", () ->
-                    new Item(new Item.Properties().tab(ModCreativeTab.TEA_TAB).food(ModTea.RELAXING_TEA)));
+                    new Item(new Item.Properties().tab(ModCreativeTab.TEA_TAB).food(
+                            ModTea.createTeaEffect(
+                                    // 실명
+                                    MobEffects.BLINDNESS, 200, 0
+                            )
+                    )));
 
     public static final RegistryObject<Item> CORNFLOWER_TEA =
             ITEMS.register("cornflower_tea", () ->
-                    new Item(new Item.Properties().tab(ModCreativeTab.TEA_TAB).food(ModTea.RELAXING_TEA)));
+                    new Item(new Item.Properties().tab(ModCreativeTab.TEA_TAB).food(
+                            ModTea.createTeaEffect(
+                                    // 효과 부여 음수로 안된대서 일단 구속 걸어놨어요
+                                    MobEffects.MOVEMENT_SLOWDOWN, 200, 0
+                            )
+                    )));
 
-    public static final RegistryObject<Item> SUNFLOWER_TEA =
-            ITEMS.register("sunflower_tea", () ->
-                    new Item(new Item.Properties().tab(ModCreativeTab.TEA_TAB).food(ModTea.RELAXING_TEA)));
+    public static final RegistryObject<Item> WITHER_ROSE_TEA =
+            ITEMS.register("wither_rose_tea", () ->
+                    new Item(new Item.Properties().tab(ModCreativeTab.TEA_TAB).food(
+                            ModTea.createTeaEffect(
+                                    // 시듦(wither)
+                                    MobEffects.WITHER, 200, 0
+                            )
+                    )));
 
-    public static final RegistryObject<Item> LILAC_TEA =
-            ITEMS.register("lilac_tea", () ->
-                    new Item(new Item.Properties().tab(ModCreativeTab.TEA_TAB).food(ModTea.RELAXING_TEA)));
+    public static final RegistryObject<Item> FERN_TEA =
+            ITEMS.register("fern_tea", () ->
+                    new Item(new Item.Properties().tab(ModCreativeTab.TEA_TAB).food(
+                            ModTea.createTeaEffect(
+                                    // poison
+                                    MobEffects.POISON, 200, 0
+                            )
+                    )));
 
-    public static final RegistryObject<Item> ROSE_TEA =
-            ITEMS.register("rose_tea", () ->
-                    new Item(new Item.Properties().tab(ModCreativeTab.TEA_TAB).food(ModTea.RELAXING_TEA)));
-
-    public static final RegistryObject<Item> PEONY_TEA =
-            ITEMS.register("peony_tea", () ->
-                    new Item(new Item.Properties().tab(ModCreativeTab.TEA_TAB).food(ModTea.RELAXING_TEA)));
+    public static final RegistryObject<Item> WARPED_ROOTS_TEA =
+            ITEMS.register("warped_roots_tea", () ->
+                    new Item(new Item.Properties().tab(ModCreativeTab.TEA_TAB).food(
+                            ModTea.createTeaEffect(
+                                    // 즉시 피해
+                                    MobEffects.HARM, 1, 0
+                            )
+                    )));
 }
