@@ -15,4 +15,8 @@ public class ModMenus {
     public static final RegistryObject<MenuType<WaterDispenserMenu>> WATER_DISPENSER =
             MENUS.register("water_dispenser", () ->
                     new MenuType<>((id, inv) -> new WaterDispenserMenu(id, inv, BlockPos.ZERO)));
+
+//    public static final RegistryObject<MenuType<IceMakerMenu>> ICE_MAKER =
+//            MENUS.register("ice_maker", () ->
+//                    new MenuType<>((id, inv) -> new IceMakerMenu(id, inv, BlockPos.ZERO)));
 }

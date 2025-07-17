@@ -35,13 +35,6 @@ public class ModItems {
             ITEMS.register("ground_coffee", () ->
                     new Item(new Item.Properties().tab(ModCreativeTab.CAFFEINE_TAB)));
 
-//    public static RegistryObject<Item> getGrinderItem() {
-//        return ModBlocks.GRINDER_ITEM;
-//    }
-    public static final RegistryObject<Item> GRINDER_ITEM =
-            ModItems.ITEMS.register("grinder", () ->
-                    new BlockItem(ModBlocks.GRINDER_BLOCK.get(), new Item.Properties().tab(ModCreativeTab.CAFFEINE_TAB))
-            );
     /**
      * Ingredients
      */
@@ -184,6 +177,20 @@ public class ModItems {
     public static void register() {
         ITEMS.register(FMLJavaModLoadingContext.get().getModEventBus());
     }
+
+
+    //    public static RegistryObject<Item> getGrinderItem() {
+//        return ModBlocks.GRINDER_ITEM;
+//    }
+    public static final RegistryObject<Item> GRINDER_ITEM =
+            ModItems.ITEMS.register("grinder", () ->
+                    new BlockItem(ModBlocks.GRINDER_BLOCK.get(), new Item.Properties().tab(ModCreativeTab.CAFFEINE_TAB))
+            );
+
+    public static final RegistryObject<Item> ICE_MAKER =
+            ModItems.ITEMS.register("ice_maker", () ->
+                    new BlockItem(ModBlocks.ICE_MAKER.get(), new Item.Properties().tab(ModCreativeTab.CAFFEINE_TAB))
+            );
 
     /**
      * dried tea leaf
