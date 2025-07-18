@@ -1,9 +1,16 @@
 package com.caffeineaddict.caffeineaddictmode;
 
-import com.caffeineaddict.caffeineaddictmode.block.entity.GrinderBlockEntities;
 import com.caffeineaddict.caffeineaddictmode.menu.ModMenuTypes;
-import com.caffeineaddict.caffeineaddictmode.screen.GrinderScreen;
+import com.caffeineaddict.caffeineaddictmode.network.PacketHandler;
+import com.caffeineaddict.caffeineaddictmode.registry.ModBlockEntities;
+import com.caffeineaddict.caffeineaddictmode.registry.ModBlocks;
+import com.caffeineaddict.caffeineaddictmode.registry.ModMenus;
 import com.caffeineaddict.caffeineaddictmode.sound.ModSoundEvents;
+
+import com.caffeineaddict.caffeineaddictmode.screen.WaterDispenserScreen;
+import com.caffeineaddict.caffeineaddictmode.screen.GrinderScreen;
+import com.caffeineaddict.caffeineaddictmode.block.entity.GrinderBlockEntities;
+import com.caffeineaddict.caffeineaddictmode.screen.IceMakerScreen;
 
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraftforge.api.distmarker.Dist;
@@ -14,6 +21,8 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.Material;
+import com.mojang.logging.LogUtils;
+import net.minecraft.client.gui.screens.MenuScreens;
 import com.caffeineaddict.caffeineaddictmode.network.PacketHandler;
 import com.caffeineaddict.caffeineaddictmode.registry.ModBlockEntities;
 import com.caffeineaddict.caffeineaddictmode.registry.ModBlocks;
@@ -71,20 +80,23 @@ public class CaffeineAddictMode {
     private void commonSetup(final FMLCommonSetupEvent event) {
         event.enqueueWork(PacketHandler::register);
     }
-    private void clientSetup(final FMLClientSetupEvent event) {
-        event.enqueueWork(() -> {
-            net.minecraft.client.gui.screens.MenuScreens.register(
-                    com.caffeineaddict.caffeineaddictmode.menu.ModMenuTypes.GRINDER_MENU.get(),
-                    com.caffeineaddict.caffeineaddictmode.screen.GrinderScreen::new
-            );
-        });
-    }
+//    private void clientSetup(final FMLClientSetupEvent event) {
+//        event.enqueueWork(() -> {
+//            net.minecraft.client.gui.screens.MenuScreens.register(
+//                    com.caffeineaddict.caffeineaddictmode.menu.ModMenuTypes.GRINDER_MENU.get(),
+//                    com.caffeineaddict.caffeineaddictmode.screen.GrinderScreen::new
+//            );
+//        });
+//    }
 
     @Mod.EventBusSubscriber(modid = CaffeineAddictMode.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
     public class ClientModEvents {
         @SubscribeEvent
         public static void onClientSetup(final FMLClientSetupEvent event) {
             event.enqueueWork(() -> {
+                MenuScreens.register(ModMenus.WATER_DISPENSER.get(), WaterDispenserScreen::new);
+                MenuScreens.register(ModMenuTypes.GRINDER_MENU.get(), GrinderScreen::new);
+                MenuScreens.register(ModMenuTypes.ICE_MAKER_MENU.get(), IceMakerScreen::new);
             });
         }
     }

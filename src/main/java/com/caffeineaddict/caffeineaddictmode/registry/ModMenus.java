@@ -10,4 +10,8 @@ import net.minecraftforge.registries.RegistryObject;
 public class ModMenus {
     public static final DeferredRegister<MenuType<?>> MENUS =
             DeferredRegister.create(ForgeRegistries.MENU_TYPES, CaffeineAddictMode.MOD_ID);
+
+    public static final RegistryObject<MenuType<WaterDispenserMenu>> WATER_DISPENSER =
+            MENUS.register("water_dispenser", () ->
+                    new MenuType<>((id, inv) -> new WaterDispenserMenu(id, inv, BlockPos.ZERO)));
 }

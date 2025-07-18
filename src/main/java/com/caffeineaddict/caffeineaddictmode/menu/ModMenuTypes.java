@@ -15,4 +15,8 @@ public class ModMenuTypes {
     public static final RegistryObject<MenuType<GrinderMenu>> GRINDER_MENU =
             MENUS.register("grinder_menu",
                     () -> IForgeMenuType.create(GrinderMenu::new));
+
+    public static final RegistryObject<MenuType<IceMakerMenu>> ICE_MAKER_MENU =
+            MENUS.register("ice_maker_menu",
+                    () -> IForgeMenuType.create(IceMakerMenu::new));
 }

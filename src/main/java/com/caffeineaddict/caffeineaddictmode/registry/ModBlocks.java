@@ -1,8 +1,10 @@
 package com.caffeineaddict.caffeineaddictmode.registry;
 
-import com.caffeineaddict.caffeineaddictmode.CaffeineAddictMode;
 import com.caffeineaddict.caffeineaddictmode.block.WaterDispenserBlock;
 import com.caffeineaddict.caffeineaddictmode.block.entity.GrinderBlock;
+import com.caffeineaddict.caffeineaddictmode.block.IceMakerBlock;
+
+import com.caffeineaddict.caffeineaddictmode.CaffeineAddictMode;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.Material;
@@ -22,6 +24,10 @@ public class ModBlocks {
     public static final RegistryObject<Block> GRINDER_BLOCK =
             BLOCKS.register("grinder", () ->
                     new GrinderBlock());
+
+    public static final RegistryObject<Block> ICE_MAKER =
+            BLOCKS.register("ice_maker", () ->
+                    new IceMakerBlock());
 
     public static void register() {
         BLOCKS.register(FMLJavaModLoadingContext.get().getModEventBus());
