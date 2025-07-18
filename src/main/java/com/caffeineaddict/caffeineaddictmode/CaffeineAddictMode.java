@@ -23,6 +23,10 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.Material;
 import com.mojang.logging.LogUtils;
 import net.minecraft.client.gui.screens.MenuScreens;
+import com.caffeineaddict.caffeineaddictmode.network.PacketHandler;
+import com.caffeineaddict.caffeineaddictmode.registry.ModBlockEntities;
+import com.caffeineaddict.caffeineaddictmode.registry.ModBlocks;
+import com.caffeineaddict.caffeineaddictmode.registry.ModMenus;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -49,7 +53,6 @@ public class CaffeineAddictMode {
 
     public static final RegistryObject<Item> EXAMPLE_BLOCK_ITEM =
             ITEMS.register("example_block", () -> new BlockItem(EXAMPLE_BLOCK.get(), new Item.Properties().tab(CreativeModeTab.TAB_BUILDING_BLOCKS)));
-
 
     public CaffeineAddictMode() {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();

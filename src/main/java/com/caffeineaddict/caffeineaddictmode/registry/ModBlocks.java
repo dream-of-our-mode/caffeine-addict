@@ -16,8 +16,6 @@ import net.minecraftforge.registries.RegistryObject;
 public class ModBlocks {
     public static final DeferredRegister<Block> BLOCKS =
             DeferredRegister.create(ForgeRegistries.BLOCKS, CaffeineAddictMode.MOD_ID);
-//    public static final DeferredRegister<Block> BLOCKS =
-//            DeferredRegister.create(ForgeRegistries.BLOCKS, CaffeineAddictMode.MOD_ID);
 
     public static final RegistryObject<Block> WATER_DISPENSER =
             BLOCKS.register("water_dispenser",
@@ -30,10 +28,7 @@ public class ModBlocks {
     public static final RegistryObject<Block> ICE_MAKER =
             BLOCKS.register("ice_maker", () ->
                     new IceMakerBlock());
-    // 그라인더 블록 아이템 등록
-//    public static final RegistryObject<Item> GRINDER_ITEM =
-//            ModItems.ITEMS.register("grinder", () ->
-//                    new BlockItem(GRINDER_BLOCK.get(), new Item.Properties().tab(ModCreativeTab.CAFFEINE_TAB)));
+
     public static void register() {
         BLOCKS.register(FMLJavaModLoadingContext.get().getModEventBus());
     }
