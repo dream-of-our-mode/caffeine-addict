@@ -57,8 +57,10 @@ public class CaffeineAddictMode {
     public CaffeineAddictMode() {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
-        modEventBus.addListener(this::commonSetup);
-        //modEventBus.addListener(this::clientSetup);
+        ModItems.register(modEventBus);
+        ModBlocks.register(modEventBus);
+        ModBlockEntities.register(modEventBus);
+        ModMenuTypes.register(modEventBus);
 
         ModBlocks.BLOCKS.register(modEventBus);
         GrinderBlockEntities.register();
@@ -72,7 +74,7 @@ public class CaffeineAddictMode {
         ITEMS.register(modEventBus);
 
         FMLJavaModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, Config.SPEC);
-
+        
         modEventBus.addListener(this::commonSetup);
         MinecraftForge.EVENT_BUS.register(this);
     }
@@ -80,15 +82,7 @@ public class CaffeineAddictMode {
     private void commonSetup(final FMLCommonSetupEvent event) {
         event.enqueueWork(PacketHandler::register);
     }
-//    private void clientSetup(final FMLClientSetupEvent event) {
-//        event.enqueueWork(() -> {
-//            net.minecraft.client.gui.screens.MenuScreens.register(
-//                    com.caffeineaddict.caffeineaddictmode.menu.ModMenuTypes.GRINDER_MENU.get(),
-//                    com.caffeineaddict.caffeineaddictmode.screen.GrinderScreen::new
-//            );
-//        });
-//    }
-
+  
     @Mod.EventBusSubscriber(modid = CaffeineAddictMode.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
     public class ClientModEvents {
         @SubscribeEvent
