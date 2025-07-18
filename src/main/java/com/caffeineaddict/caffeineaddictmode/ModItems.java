@@ -3,6 +3,9 @@ package com.caffeineaddict.caffeineaddictmode;
 import com.caffeineaddict.caffeineaddictmode.CaffeineAddictMode;
 import net.minecraft.world.item.CreativeModeTab;
 import com.caffeineaddict.caffeineaddictmode.registry.ModBlocks;
+import com.caffeineaddict.caffeineaddictmode.drink.Drink;
+import com.caffeineaddict.caffeineaddictmode.drink.Coffee;
+import com.caffeineaddict.caffeineaddictmode.drink.Tea;
 
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffect;
@@ -16,6 +19,8 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
+
+import java.util.List;
 
 import javax.annotation.Nullable;
 
@@ -83,86 +88,32 @@ public class ModItems {
      */
     public static final RegistryObject<Item> ESPRESSO = ITEMS.register(
             "espresso",
-            () -> new Item(new Item.Properties()
-                    .tab(ModCreativeTab.CAFFEINE_TAB)
-                    .food(new FoodProperties.Builder()
-                            .nutrition(2)
-                            .saturationMod(0.3f)
-                            .effect(() -> new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 15 * 20, 0), 1.0f)
-                            .alwaysEat()
-                            .build()
-                    )
-            )
+            () -> new Coffee(1, 1, List.of(MobEffects.MOVEMENT_SPEED), 15, 0)
     );
 
     public static final RegistryObject<Item> ICE_WATER = ITEMS.register(
             "ice_water",
-            () -> new Item(new Item.Properties()
-                    .tab(ModCreativeTab.CAFFEINE_TAB)
-                    .food(new FoodProperties.Builder()
-                            .nutrition(2)
-                            .saturationMod(0.3f)
-                            .effect(() -> new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 15 * 20, 0), 1.0f)
-                            .alwaysEat()
-                            .build()
-                    )
-            )
+            () -> new Drink(1, 1, List.of(MobEffects.MOVEMENT_SPEED), 15, 0)
     );
 
     public static final RegistryObject<Item> AMERICANO = ITEMS.register(
             "americano",
-            () -> new Item(new Item.Properties()
-                    .tab(ModCreativeTab.CAFFEINE_TAB)
-                    .food(new FoodProperties.Builder()
-                            .nutrition(2)
-                            .saturationMod(0.3f)
-                            .effect(() -> new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 15 * 20, 0), 1.0f)
-                            .alwaysEat()
-                            .build()
-                    )
-            )
+            () -> new Coffee(1, 1, List.of(MobEffects.MOVEMENT_SPEED), 15, 0)
     );
 
     public static final RegistryObject<Item> ICE_AMERICANO = ITEMS.register(
             "ice_americano",
-            () -> new Item(new Item.Properties()
-                    .tab(ModCreativeTab.CAFFEINE_TAB)
-                    .food(new FoodProperties.Builder()
-                            .nutrition(2)
-                            .saturationMod(0.3f)
-                            .effect(() -> new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 15 * 20, 0), 1.0f)
-                            .alwaysEat()
-                            .build()
-                    )
-            )
+            () -> new Coffee(1, 1, List.of(MobEffects.MOVEMENT_SPEED), 15, 0)
     );
 
     public static final RegistryObject<Item> LATTE = ITEMS.register(
             "latte",
-            () -> new Item(new Item.Properties()
-                    .tab(ModCreativeTab.CAFFEINE_TAB)
-                    .food(new FoodProperties.Builder()
-                            .nutrition(2)
-                            .saturationMod(0.3f)
-                            .effect(() -> new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 15 * 20, 0), 1.0f)
-                            .alwaysEat()
-                            .build()
-                    )
-            )
+            () -> new Coffee(1, 1, List.of(MobEffects.MOVEMENT_SPEED), 15, 0)
     );
 
     public static final RegistryObject<Item> ICE_LATTE = ITEMS.register(
             "ice_latte",
-            () -> new Item(new Item.Properties()
-                    .tab(ModCreativeTab.CAFFEINE_TAB)
-                    .food(new FoodProperties.Builder()
-                            .nutrition(2)
-                            .saturationMod(0.3f)
-                            .effect(() -> new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 15 * 20, 0), 1.0f)
-                            .alwaysEat()
-                            .build()
-                    )
-            )
+            () -> new Coffee(1, 1, List.of(MobEffects.MOVEMENT_SPEED), 15, 0)
     );
 
     /**
@@ -230,97 +181,43 @@ public class ModItems {
     /**
      * tea
      */
-    public class ModTea {
-        // goodEffect 별도 지정 x (기본 적용: 화염저항 60초)
-        public static FoodProperties createTeaEffect(
-            MobEffect badEffect, int badDuration, int badAmplifier) {
-                return createTeaEffect(
-                    MobEffects.FIRE_RESISTANCE, 1200, 0,
-                    badEffect, badDuration, badAmplifier
-            );
-        }
-        // goodEffect 직접 지정
-        public static FoodProperties createTeaEffect(
-            MobEffect goodEffect, int goodDuration, int goodAmplifier,
-            MobEffect badEffect, int badDuration, int badAmplifier) {
-                return new FoodProperties.Builder()
-                    .nutrition(1)
-                    .saturationMod(0.3F)
-                    .effect(() -> new MobEffectInstance(goodEffect, goodDuration, goodAmplifier), 1.0F)
-                    .effect(() -> new MobEffectInstance(badEffect, badDuration, badAmplifier), 1.0F)
-                    .build();
-        }
-    }
+    public static final RegistryObject<Item> DANDELION_TEA = ITEMS.register(
+            "dandelion_tea",
+            () -> new Tea(List.of(MobEffects.DIG_SLOWDOWN), 20, 0)
+    );
 
-    public static final RegistryObject<Item> DANDELION_TEA =
-        ITEMS.register("dandelion_tea", () ->
-                new Item(new Item.Properties().tab(ModCreativeTab.TEA_TAB).food(
-                        ModTea.createTeaEffect(
-                                // mining_fatigue(채굴피로)
-                                MobEffects.DIG_SLOWDOWN, 200, 0
-                        )
-                )));
+    public static final RegistryObject<Item> POPPY_TEA = ITEMS.register(
+            "poppy_tea",
+            () -> new Tea(List.of(MobEffects.CONFUSION), 10, 0)
+    );
 
-    public static final RegistryObject<Item> POPPY_TEA =
-            ITEMS.register("poppy_tea", () ->
-                new Item(new Item.Properties().tab(ModCreativeTab.TEA_TAB).food(
-                            ModTea.createTeaEffect(
-                                    // nausea(멀미)
-                                    MobEffects.CONFUSION, 200, 0
-                            )
-                    )));
+    public static final RegistryObject<Item> ALLIUM_TEA = ITEMS.register(
+            "allium_tea",
+            () -> new Tea(List.of(MobEffects.WEAKNESS), 20, 0)
+    );
 
-    public static final RegistryObject<Item> ALLIUM_TEA =
-            ITEMS.register("allium_tea", () ->
-                    new Item(new Item.Properties().tab(ModCreativeTab.TEA_TAB).food(
-                            ModTea.createTeaEffect(
-                                    // 나약함
-                                    MobEffects.WEAKNESS, 400, 0
-                            )
-                    )));
+    public static final RegistryObject<Item> AZURE_BLUET_TEA = ITEMS.register(
+            "azure_bluet_tea",
+            () -> new Tea(List.of(MobEffects.BLINDNESS), 10, 0)
+    );
 
-    public static final RegistryObject<Item> AZURE_BLUET_TEA =
-            ITEMS.register("azure_bluet_tea", () ->
-                    new Item(new Item.Properties().tab(ModCreativeTab.TEA_TAB).food(
-                            ModTea.createTeaEffect(
-                                    // 실명
-                                    MobEffects.BLINDNESS, 200, 0
-                            )
-                    )));
+    public static final RegistryObject<Item> CORNFLOWER_TEA = ITEMS.register(
+            "cornflower_tea", // 효과 부여 음수로 안된대서 일단 구속 걸어놨어요
+            () -> new Tea(List.of(MobEffects.MOVEMENT_SLOWDOWN), 10, 0)
+    );
 
-    public static final RegistryObject<Item> CORNFLOWER_TEA =
-            ITEMS.register("cornflower_tea", () ->
-                    new Item(new Item.Properties().tab(ModCreativeTab.TEA_TAB).food(
-                            ModTea.createTeaEffect(
-                                    // 효과 부여 음수로 안된대서 일단 구속 걸어놨어요
-                                    MobEffects.MOVEMENT_SLOWDOWN, 200, 0
-                            )
-                    )));
+    public static final RegistryObject<Item> WITHER_ROSE_TEA = ITEMS.register(
+            "wither_rose_tea",
+            () -> new Tea(List.of(MobEffects.WITHER), 10, 0)
+    );
 
-    public static final RegistryObject<Item> WITHER_ROSE_TEA =
-            ITEMS.register("wither_rose_tea", () ->
-                    new Item(new Item.Properties().tab(ModCreativeTab.TEA_TAB).food(
-                            ModTea.createTeaEffect(
-                                    // 시듦(wither)
-                                    MobEffects.WITHER, 200, 0
-                            )
-                    )));
+    public static final RegistryObject<Item> FERN_TEA = ITEMS.register(
+            "fern_tea",
+            () -> new Tea(List.of(MobEffects.POISON), 10, 0)
+    );
 
-    public static final RegistryObject<Item> FERN_TEA =
-            ITEMS.register("fern_tea", () ->
-                    new Item(new Item.Properties().tab(ModCreativeTab.TEA_TAB).food(
-                            ModTea.createTeaEffect(
-                                    // poison
-                                    MobEffects.POISON, 200, 0
-                            )
-                    )));
-
-    public static final RegistryObject<Item> WARPED_ROOTS_TEA =
-            ITEMS.register("warped_roots_tea", () ->
-                    new Item(new Item.Properties().tab(ModCreativeTab.TEA_TAB).food(
-                            ModTea.createTeaEffect(
-                                    // 즉시 피해
-                                    MobEffects.HARM, 1, 0
-                            )
-                    )));
+    public static final RegistryObject<Item> WARPED_ROOTS_TEA = ITEMS.register(
+            "warped_roots_tea",
+            () -> new Tea(List.of(MobEffects.HARM), 1, 0)
+    );
 }

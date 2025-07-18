@@ -2,68 +2,71 @@ package com.caffeineaddict.caffeineaddictmode.drink;
 
 import com.caffeineaddict.caffeineaddictmode.ModCreativeTab;
 import com.caffeineaddict.caffeineaddictmode.ModItems;
+import java.util.ArrayList;
 import java.util.List;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.food.FoodProperties;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 
 /**
- * 음료 아이템을 정의.
- * 포션 효과 적용, 스택 불가능, 사용 후 빈 컵 드롭
- * <p>
- * {@code Coffee}에서 확장하여 사용
- *
- * @author @moongua404
+ * Tea 아이템 클래스.
+ * 기본적으로 nutrition=1, saturation=0.3, FIRE_RESISTANCE 60초 버프를 주며,
+ * de-buff는 필수로, buff는 선택적으로 지정 가능.
  */
 public class Tea extends Drink {
-    private static final String TAG_CREATOR = "creator";
-    private static final String TAG_STAR = "star";
-
-    //protected final List<MobEffect> effects;
-    protected int duration;     // 초 단위
-    protected int amplifier;
+    private final List<MobEffect> badEffects;
+    private final int badDuration;
+    private final int badAmplifier;
 
     /**
-     * Tea 아이템
+     * 기본 buff(FIRE_RESISTANCE 60초)를 적용하고,
+     * de-buff만 지정하는 Tea 생성자.
      *
-     * @param nutrition   음식의 포만감 수치
-     * @param saturation  음식의 포화도 수치
-     * @param effects      적용할 효과 (예: 이동 속도 향상 등)
-     * @param duration    효과 지속 시간 (초 단위)
-     * @param amplifier   효과 증폭 수치
+     * @param badEffects   적용할 de-buff
+     * @param badDuration  de-buff 지속 시간 (초)
+     * @param badAmplifier de-buff 증폭치
      */
-    public Tea(int nutrition, float saturation, List<MobEffect> effects, int duration, int amplifier) {
-        super(nutrition, saturation, effects, duration, amplifier);
-    }
-//    public Tea(int nutrition, float saturation, List<MobEffect> effects, int duration, int amplifier) {
-//        super(new Item.Properties()
-//                .tab(ModCreativeTab.CAFFEINE_TAB)
-//                .stacksTo(1)
-//                .food(new FoodProperties.Builder()
-//                        .nutrition(nutrition)
-//                        .saturationMod(saturation)
-//                        .alwaysEat()
-//                        .build()));
-//        this.effects = List.copyOf(effects);
-//        this.duration = duration;
-//        this.amplifier = amplifier;
-//    }
-
-    protected List<MobEffectInstance> createEffectInstances(ItemStack stack) {
-        return effects.stream()
-                .map(effect -> new MobEffectInstance(effect, duration * 20, amplifier))
-                .toList();
+    public Tea(List<MobEffect> badEffects, int badDuration, int badAmplifier) {
+        this(List.of(MobEffects.FIRE_RESISTANCE), 60, 0, badEffects, badDuration, badAmplifier);
     }
 
     /**
-     * 아이템 사용 후 호출
-     * 빈 컵을 지급 (크리에이티브 모드일 경우 지급하지 않음)
+     * goodEffect와 badEffect를 모두 지정하는 Tea 생성자.
+     *
+     * @param goodEffects    적용할 buff
+     * @param goodDuration   buff 지속 시간 (초)
+     * @param goodAmplifier  buff 증폭치
+     * @param badEffects     적용할 de-buff
+     * @param badDuration    de-buff 지속 시간 (초)
+     * @param badAmplifier   de-buff 증폭치
      */
+    public Tea(List<MobEffect> goodEffects, int goodDuration, int goodAmplifier,
+               List<MobEffect> badEffects, int badDuration, int badAmplifier) {
+        // nutrition=1, saturation=0.3 고정
+        super(1, 0.3F, goodEffects, goodDuration, goodAmplifier);
+        this.badEffects = List.copyOf(badEffects);
+        this.badDuration = badDuration;
+        this.badAmplifier = badAmplifier;
+    }
+
+    @Override
+    protected List<MobEffectInstance> createEffectInstances(ItemStack stack) {
+        List<MobEffectInstance> effectsList = new ArrayList<>();
+        // goodEffects (Drink가 관리)
+        effectsList.addAll(super.createEffectInstances(stack));
+        // badEffects
+        effectsList.addAll(
+                badEffects.stream()
+                        .map(effect -> new MobEffectInstance(effect, badDuration * 20, badAmplifier))
+                        .toList()
+        );
+        return effectsList;
+    }
+
     @Override
     public ItemStack finishUsingItem(ItemStack stack, Level level, LivingEntity entity) {
         ItemStack result = super.finishUsingItem(stack, level, entity);
@@ -78,13 +81,5 @@ public class Tea extends Drink {
             }
         }
         return result;
-    }
-
-    public void setDuration(int duration) {
-        this.duration = duration;
-    }
-
-    public void setAmplifier(int amplifier) {
-        this.amplifier = amplifier;
     }
 }
