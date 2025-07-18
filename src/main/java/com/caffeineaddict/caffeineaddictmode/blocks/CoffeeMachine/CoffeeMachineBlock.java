@@ -1,6 +1,6 @@
 package com.caffeineaddict.caffeineaddictmode.blocks.CoffeeMachine;
 
-import com.caffeineaddict.caffeineaddictmode.ModBlockEntities;
+import com.caffeineaddict.caffeineaddictmode.CoffeeMachineBlockEntities;
 import javax.annotation.Nullable;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
@@ -17,8 +17,6 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraftforge.network.NetworkHooks;
-import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.common.extensions.IForgeBlock;
 
 public class CoffeeMachineBlock extends Block implements EntityBlock {
     public CoffeeMachineBlock(Properties properties) {
@@ -51,7 +49,7 @@ public class CoffeeMachineBlock extends Block implements EntityBlock {
     @Override
     @Nullable
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {
-        return type == ModBlockEntities.COFFEE_MACHINE.get() ?
+        return type == CoffeeMachineBlockEntities.COFFEE_MACHINE.get() ?
                 (lvl, pos, st, be) -> ((CoffeeMachineBlockEntity) be).tick(lvl, pos, st)
                 : null;
     }

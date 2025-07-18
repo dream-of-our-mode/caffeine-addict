@@ -1,8 +1,6 @@
 package com.caffeineaddict.caffeineaddictmode.blocks.CoffeeMachine;
 
-import com.caffeineaddict.caffeineaddictmode.CaffeineAddictMode;
-import com.caffeineaddict.caffeineaddictmode.ModBlocks;
-import com.caffeineaddict.caffeineaddictmode.ModMenuTypes;
+import com.caffeineaddict.caffeineaddictmode.menu.ModMenuTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.Container;
