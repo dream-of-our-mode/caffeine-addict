@@ -8,6 +8,13 @@ import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.Item;
+import net.minecraftforge.registries.DeferredRegister;
+import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.RegistryObject;
+import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
 public class ModBlocks {
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS,
@@ -15,6 +22,10 @@ public class ModBlocks {
 
     public static final RegistryObject<Block> COFFEE_MACHINE_BLOCK = BLOCKS.register("coffee_machine",
             () -> new CoffeeMachineBlock(Properties.of(Material.STONE).strength(2.0f)));
+  
+    public static final RegistryObject<Block> GRINDER_BLOCK =
+            BLOCKS.register("grinder", () ->
+                    new GrinderBlock());
 
     public static void register(IEventBus modEventBus){
         BLOCKS.register(modEventBus);
