@@ -1,8 +1,7 @@
-package com.caffeineaddict.caffeineaddictmode.block.entity;
+package com.caffeineaddict.caffeineaddictmode.blocks.IceMaker;
 
-import com.caffeineaddict.caffeineaddictmode.menu.IceMakerMenu;
 import com.caffeineaddict.caffeineaddictmode.registry.ModBlockEntities;
-import com.caffeineaddict.caffeineaddictmode.ModItems;
+import com.caffeineaddict.caffeineaddictmode.registry.ModItems;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -15,7 +14,6 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;

@@ -1,7 +1,7 @@
-package com.caffeineaddict.caffeineaddictmode.drink;
+package com.caffeineaddict.caffeineaddictmode.items.drink;
 
-import com.caffeineaddict.caffeineaddictmode.ModCreativeTab;
-import com.caffeineaddict.caffeineaddictmode.ModItems;
+import com.caffeineaddict.caffeineaddictmode.registry.ModCreativeTab;
+import com.caffeineaddict.caffeineaddictmode.registry.ModItems;
 import java.util.List;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;

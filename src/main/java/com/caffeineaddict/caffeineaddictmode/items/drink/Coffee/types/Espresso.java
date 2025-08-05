@@ -1,6 +1,6 @@
-package com.caffeineaddict.caffeineaddictmode.items.drink.Coffee;
+package com.caffeineaddict.caffeineaddictmode.items.drink.Coffee.types;
 
-import com.caffeineaddict.caffeineaddictmode.ModItems;
+import com.caffeineaddict.caffeineaddictmode.registry.ModItems;
 import com.caffeineaddict.caffeineaddictmode.TagNSpecialConstant;
 import com.caffeineaddict.caffeineaddictmode.items.drink.DrinkEffects;
 import com.caffeineaddict.caffeineaddictmode.items.drink.DrinkItem;
@@ -12,7 +12,6 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 

@@ -1,4 +1,4 @@
-package com.caffeineaddict.caffeineaddictmode.network;
+package com.caffeineaddict.caffeineaddictmode.blocks.IceMaker.network;
 
 import com.caffeineaddict.caffeineaddictmode.CaffeineAddictMode;
 import net.minecraft.resources.ResourceLocation;

@@ -1,9 +1,7 @@
-package com.caffeineaddict.caffeineaddictmode.block;
+package com.caffeineaddict.caffeineaddictmode.blocks.WaterDispenser;
 
-import com.caffeineaddict.caffeineaddictmode.block.entity.WaterDispenserBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -16,8 +14,6 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.network.NetworkHooks;
-import org.jetbrains.annotations.NotNull;
 
 public class WaterDispenserBlock extends Block implements EntityBlock {
 

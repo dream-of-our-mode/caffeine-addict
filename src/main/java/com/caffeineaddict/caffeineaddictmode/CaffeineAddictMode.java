@@ -1,32 +1,18 @@
 package com.caffeineaddict.caffeineaddictmode;
 
-import com.caffeineaddict.caffeineaddictmode.menu.ModMenuTypes;
-import com.caffeineaddict.caffeineaddictmode.network.PacketHandler;
+import com.caffeineaddict.caffeineaddictmode.blocks.CoffeeMachine.CoffeeMachineScreen;
+import com.caffeineaddict.caffeineaddictmode.blocks.IceMaker.network.PacketHandler;
 import com.caffeineaddict.caffeineaddictmode.registry.ModBlockEntities;
 import com.caffeineaddict.caffeineaddictmode.registry.ModBlocks;
+import com.caffeineaddict.caffeineaddictmode.registry.ModItems;
 import com.caffeineaddict.caffeineaddictmode.registry.ModMenus;
-import com.caffeineaddict.caffeineaddictmode.sound.ModSoundEvents;
-
-import com.caffeineaddict.caffeineaddictmode.screen.WaterDispenserScreen;
-import com.caffeineaddict.caffeineaddictmode.screen.GrinderScreen;
-import com.caffeineaddict.caffeineaddictmode.block.entity.GrinderBlockEntities;
-import com.caffeineaddict.caffeineaddictmode.screen.IceMakerScreen;
+import com.caffeineaddict.caffeineaddictmode.registry.ModSoundEvents;
+import com.caffeineaddict.caffeineaddictmode.blocks.Grinder.GrinderScreen;
+import com.caffeineaddict.caffeineaddictmode.blocks.IceMaker.IceMakerScreen;
 
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraftforge.api.distmarker.Dist;
 import com.mojang.logging.LogUtils;
-import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.item.CreativeModeTab;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.minecraft.world.level.material.Material;
-import com.mojang.logging.LogUtils;
-import net.minecraft.client.gui.screens.MenuScreens;
-import com.caffeineaddict.caffeineaddictmode.network.PacketHandler;
-import com.caffeineaddict.caffeineaddictmode.registry.ModBlockEntities;
-import com.caffeineaddict.caffeineaddictmode.registry.ModBlocks;
-import com.caffeineaddict.caffeineaddictmode.registry.ModMenus;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -35,9 +21,6 @@ import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.RegistryObject;
 import org.slf4j.Logger;
 
 @Mod(CaffeineAddictMode.MOD_ID)
@@ -45,33 +28,14 @@ public class CaffeineAddictMode {
     public static final String MOD_ID = "caffeineaddictmode";
     public static final Logger LOGGER = LogUtils.getLogger();
 
-    public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, MOD_ID);
-    public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, MOD_ID);
-
-    public static final RegistryObject<Block> EXAMPLE_BLOCK =
-            BLOCKS.register("example_block", () -> new Block(BlockBehaviour.Properties.of(Material.STONE)));
-
-    public static final RegistryObject<Item> EXAMPLE_BLOCK_ITEM =
-            ITEMS.register("example_block", () -> new BlockItem(EXAMPLE_BLOCK.get(), new Item.Properties().tab(CreativeModeTab.TAB_BUILDING_BLOCKS)));
-
     public CaffeineAddictMode() {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
         ModItems.register(modEventBus);
         ModBlocks.register(modEventBus);
         ModBlockEntities.register(modEventBus);
-        ModMenuTypes.register(modEventBus);
-
-        ModBlocks.BLOCKS.register(modEventBus);
-        GrinderBlockEntities.register();
-        ModItems.ITEMS.register(modEventBus);
-        ModMenuTypes.MENUS.register(modEventBus);
-        ModSoundEvents.SOUNDS.register(modEventBus);
-        ModMenus.MENUS.register(modEventBus);
-        ModBlockEntities.BLOCK_ENTITIES.register(modEventBus);
-
-        BLOCKS.register(modEventBus);
-        ITEMS.register(modEventBus);
+        ModMenus.register(modEventBus);
+        ModSoundEvents.register(modEventBus);
 
         FMLJavaModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, Config.SPEC);
         
@@ -88,9 +52,10 @@ public class CaffeineAddictMode {
         @SubscribeEvent
         public static void onClientSetup(final FMLClientSetupEvent event) {
             event.enqueueWork(() -> {
-                MenuScreens.register(ModMenus.WATER_DISPENSER.get(), WaterDispenserScreen::new);
-                MenuScreens.register(ModMenuTypes.GRINDER_MENU.get(), GrinderScreen::new);
-                MenuScreens.register(ModMenuTypes.ICE_MAKER_MENU.get(), IceMakerScreen::new);
+                //MenuScreens.register(ModMenus.WATER_DISPENSER.get(), WaterDispenserScreen::new);
+                MenuScreens.register(ModMenus.GRINDER_MENU.get(), GrinderScreen::new);
+                MenuScreens.register(ModMenus.ICE_MAKER_MENU.get(), IceMakerScreen::new);
+                MenuScreens.register(ModMenus.COFFEE_MACHINE_MENU.get(), CoffeeMachineScreen::new);
             });
         }
     }

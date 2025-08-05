@@ -1,6 +1,6 @@
-package com.caffeineaddict.caffeineaddictmode.menu;
+package com.caffeineaddict.caffeineaddictmode.blocks.IceMaker;
 
-import com.caffeineaddict.caffeineaddictmode.block.entity.GrinderBlockEntity;
+import com.caffeineaddict.caffeineaddictmode.registry.ModItems;
 
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
@@ -12,25 +12,31 @@ import net.minecraft.world.level.Level;
 import net.minecraftforge.items.SlotItemHandler;
 import net.minecraft.world.inventory.ContainerData;
 
-public class GrinderMenu extends AbstractContainerMenu {
-    private final GrinderBlockEntity blockEntity;
+public class IceMakerMenu extends AbstractContainerMenu {
+    private final IceMakerBlockEntity icemakerblockEntity;
     private final Level level;
     private final ContainerData data;
 
-    public GrinderMenu(int id, Inventory playerInv, FriendlyByteBuf extraData) {
-        this(id, playerInv, (GrinderBlockEntity) playerInv.player.level.getBlockEntity(extraData.readBlockPos()));
+    public IceMakerMenu(int id, Inventory playerInv, FriendlyByteBuf extraData) {
+        this(id, playerInv, (IceMakerBlockEntity) playerInv.player.level.getBlockEntity(extraData.readBlockPos()));
     }
 
-    public GrinderMenu(int id, Inventory playerInv, GrinderBlockEntity blockEntity) {
-        super(ModMenuTypes.GRINDER_MENU.get(), id);
-        this.blockEntity = blockEntity;
+    public IceMakerMenu(int id, Inventory playerInv, IceMakerBlockEntity blockEntity) {
+        super(ModMenuTypes.ICE_MAKER_MENU.get(), id);
+        this.icemakerblockEntity = blockEntity;
         this.level = playerInv.player.level;
         this.data = blockEntity.getContainerData();
 
         addDataSlots(data);
 
         // BlockEntity 슬롯 (0: input, 1: output)
-        this.addSlot(new SlotItemHandler(blockEntity.getItemHandler(), 0, 56, 35));
+        this.addSlot(new SlotItemHandler(blockEntity.getItemHandler(), 0, 56, 35) {
+            @Override
+            public boolean mayPlace(ItemStack stack) {
+                return stack.getItem() == ModItems.HOT_WATER.get()
+                        || stack.getItem() == ModItems.COOL_WATER.get();
+            }
+        });
         this.addSlot(new SlotItemHandler(blockEntity.getItemHandler(), 1, 116, 35) {
             @Override
             public boolean mayPlace(ItemStack stack) {
@@ -55,7 +61,7 @@ public class GrinderMenu extends AbstractContainerMenu {
         return data.get(0) > 0;
     }
 
-//    public int getScaledProgress() {
+    //    public int getScaledProgress() {
 //        int progress = blockEntity.getProgress();
 //        int maxProgress = blockEntity.getMaxProgress();
 //        int barWidth = 24; // 진행바 최대 길이 (픽셀 단위)

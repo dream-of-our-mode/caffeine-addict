@@ -1,6 +1,5 @@
-package com.caffeineaddict.caffeineaddictmode.block;
+package com.caffeineaddict.caffeineaddictmode.blocks.Grinder;
 
-import com.caffeineaddict.caffeineaddictmode.block.entity.IceMakerBlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 
@@ -23,15 +22,15 @@ import net.minecraft.world.MenuProvider;
 
 import org.jetbrains.annotations.Nullable;
 
-public class IceMakerBlock extends Block implements EntityBlock {
-    public IceMakerBlock() {
+public class GrinderBlock extends Block implements EntityBlock {
+    public GrinderBlock() {
         super(BlockBehaviour.Properties.of(Material.STONE).strength(2.0f));
     }
 
     @Nullable
     @Override
     public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-        return new IceMakerBlockEntity(pos, state);
+        return new GrinderBlockEntity(pos, state);
     }
 
     @Override
@@ -44,7 +43,7 @@ public class IceMakerBlock extends Block implements EntityBlock {
                                  Player player, InteractionHand hand, BlockHitResult hit) {
         if (!level.isClientSide) {
             BlockEntity blockEntity = level.getBlockEntity(pos);
-            if (blockEntity instanceof IceMakerBlockEntity) {
+            if (blockEntity instanceof GrinderBlockEntity) {
                 NetworkHooks.openScreen((ServerPlayer) player, (MenuProvider) blockEntity, pos);
             }
         }
@@ -54,8 +53,8 @@ public class IceMakerBlock extends Block implements EntityBlock {
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {
         return level.isClientSide ? null : (lvl, pos, st, be) -> {
-            if (be instanceof IceMakerBlockEntity icemaker) {
-                IceMakerBlockEntity.tick(lvl, pos, st, icemaker);
+            if (be instanceof GrinderBlockEntity grinder) {
+                GrinderBlockEntity.tick(lvl, pos, st, grinder);
             }
         };
     }

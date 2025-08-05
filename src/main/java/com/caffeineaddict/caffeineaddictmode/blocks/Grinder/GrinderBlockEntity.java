@@ -1,8 +1,8 @@
-package com.caffeineaddict.caffeineaddictmode.block.entity;
+package com.caffeineaddict.caffeineaddictmode.blocks.Grinder;
 
-import com.caffeineaddict.caffeineaddictmode.menu.GrinderMenu;
-import com.caffeineaddict.caffeineaddictmode.ModItems;
-import com.caffeineaddict.caffeineaddictmode.sound.ModSoundEvents;
+import com.caffeineaddict.caffeineaddictmode.registry.ModBlockEntities;
+import com.caffeineaddict.caffeineaddictmode.registry.ModItems;
+import com.caffeineaddict.caffeineaddictmode.registry.ModSoundEvents;
 
 import javax.annotation.Nullable;
 import javax.annotation.Nonnull;
@@ -37,7 +37,7 @@ public class GrinderBlockEntity extends BlockEntity implements MenuProvider {
 
 
     public GrinderBlockEntity(BlockPos pos, BlockState state) {
-        super(GrinderBlockEntities.GRINDER.get(), pos, state);
+        super(ModBlockEntities.GRINDER.get(), pos, state);
     }
 
     @Override

@@ -1,4 +1,4 @@
-package com.caffeineaddict.caffeineaddictmode;
+package com.caffeineaddict.caffeineaddictmode.registry;
 
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;

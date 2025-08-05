@@ -1,4 +1,4 @@
-package com.caffeineaddict.caffeineaddictmode.block.entity;
+package com.caffeineaddict.caffeineaddictmode.blocks.IceMaker;
 
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
@@ -22,15 +22,15 @@ import net.minecraft.world.MenuProvider;
 
 import org.jetbrains.annotations.Nullable;
 
-public class GrinderBlock extends Block implements EntityBlock {
-    public GrinderBlock() {
+public class IceMakerBlock extends Block implements EntityBlock {
+    public IceMakerBlock() {
         super(BlockBehaviour.Properties.of(Material.STONE).strength(2.0f));
     }
 
     @Nullable
     @Override
     public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-        return new GrinderBlockEntity(pos, state);
+        return new IceMakerBlockEntity(pos, state);
     }
 
     @Override
@@ -43,7 +43,7 @@ public class GrinderBlock extends Block implements EntityBlock {
                                  Player player, InteractionHand hand, BlockHitResult hit) {
         if (!level.isClientSide) {
             BlockEntity blockEntity = level.getBlockEntity(pos);
-            if (blockEntity instanceof GrinderBlockEntity) {
+            if (blockEntity instanceof IceMakerBlockEntity) {
                 NetworkHooks.openScreen((ServerPlayer) player, (MenuProvider) blockEntity, pos);
             }
         }
@@ -53,8 +53,8 @@ public class GrinderBlock extends Block implements EntityBlock {
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {
         return level.isClientSide ? null : (lvl, pos, st, be) -> {
-            if (be instanceof GrinderBlockEntity grinder) {
-                GrinderBlockEntity.tick(lvl, pos, st, grinder);
+            if (be instanceof IceMakerBlockEntity icemaker) {
+                IceMakerBlockEntity.tick(lvl, pos, st, icemaker);
             }
         };
     }

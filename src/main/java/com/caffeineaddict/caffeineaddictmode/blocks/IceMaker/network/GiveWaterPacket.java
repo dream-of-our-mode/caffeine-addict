@@ -1,6 +1,6 @@
-package com.caffeineaddict.caffeineaddictmode.network;
+package com.caffeineaddict.caffeineaddictmode.blocks.IceMaker.network;
 
-import com.caffeineaddict.caffeineaddictmode.ModItems;
+import com.caffeineaddict.caffeineaddictmode.registry.ModItems;
 import java.util.function.Supplier;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;

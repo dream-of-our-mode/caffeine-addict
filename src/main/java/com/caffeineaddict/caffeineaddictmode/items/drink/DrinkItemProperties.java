@@ -1,6 +1,6 @@
 package com.caffeineaddict.caffeineaddictmode.items.drink;
 
-import com.caffeineaddict.caffeineaddictmode.ModCreativeTab;
+import com.caffeineaddict.caffeineaddictmode.registry.ModCreativeTab;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Item.Properties;

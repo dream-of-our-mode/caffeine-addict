@@ -1,40 +1,19 @@
-package com.caffeineaddict.caffeineaddictmode;
+package com.caffeineaddict.caffeineaddictmode.registry;
 
-import static com.caffeineaddict.caffeineaddictmode.ModBlocks.COFFEE_MACHINE_BLOCK;
+import static com.caffeineaddict.caffeineaddictmode.registry.ModBlocks.COFFEE_MACHINE_BLOCK;
 
-import com.caffeineaddict.caffeineaddictmode.items.drink.Coffee.Espresso;
-import com.caffeineaddict.caffeineaddictmode.items.drink.DrinkItemProperties;
-import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.Item.Properties;
-import net.minecraftforge.eventbus.api.IEventBus;
 import com.caffeineaddict.caffeineaddictmode.CaffeineAddictMode;
-import com.caffeineaddict.caffeineaddictmode.drink.Coffee;
-import com.caffeineaddict.caffeineaddictmode.drink.Drink;
-import java.util.List;
-import net.minecraft.world.effect.MobEffect;
-import net.minecraft.world.item.CreativeModeTab;
-import com.caffeineaddict.caffeineaddictmode.registry.ModBlocks;
-import com.caffeineaddict.caffeineaddictmode.drink.Drink;
-import com.caffeineaddict.caffeineaddictmode.drink.Coffee;
-import com.caffeineaddict.caffeineaddictmode.drink.Tea;
-
-import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.effect.MobEffect;
-import net.minecraft.world.effect.MobEffects;
-import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.BlockItem;
 import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import com.caffeineaddict.caffeineaddictmode.items.drink.Coffee.Coffee;
+import com.caffeineaddict.caffeineaddictmode.items.drink.Drink;
+import java.util.List;
+import com.caffeineaddict.caffeineaddictmode.drink.Tea;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
-
-import java.util.List;
-
-import javax.annotation.Nullable;
 
 
 public class ModItems {
@@ -58,14 +37,6 @@ public class ModItems {
     public static RegistryObject<Item> getCoffeeMachine(){
         return COFFEE_MACHINE_ITEM;
     }
-
-    public static void register(IEventBus modEventBus) {
-        ITEMS.register(modEventBus);
-  
-    public static final RegistryObject<Item> GRINDER_ITEM =
-            ModItems.ITEMS.register("grinder", () ->
-                    new BlockItem(ModBlocks.GRINDER_BLOCK.get(), new Item.Properties().tab(ModCreativeTab.CAFFEINE_TAB))
-            );
     /**
      * Ingredients
      */
@@ -151,21 +122,16 @@ public class ModItems {
                             new Item.Properties().tab(ModCreativeTab.CAFFEINE_TAB))
             );
 
-    public static void register() {
-        ITEMS.register(FMLJavaModLoadingContext.get().getModEventBus());
-    }
-
-
     //    public static RegistryObject<Item> getGrinderItem() {
 //        return ModBlocks.GRINDER_ITEM;
 //    }
     public static final RegistryObject<Item> GRINDER_ITEM =
-            ModItems.ITEMS.register("grinder", () ->
+            ITEMS.register("grinder", () ->
                     new BlockItem(ModBlocks.GRINDER_BLOCK.get(), new Item.Properties().tab(ModCreativeTab.CAFFEINE_TAB))
             );
 
     public static final RegistryObject<Item> ICE_MAKER =
-            ModItems.ITEMS.register("ice_maker", () ->
+            ITEMS.register("ice_maker", () ->
                     new BlockItem(ModBlocks.ICE_MAKER.get(), new Item.Properties().tab(ModCreativeTab.CAFFEINE_TAB))
             );
 
@@ -246,4 +212,8 @@ public class ModItems {
             "warped_roots_tea",
             () -> new Tea(List.of(MobEffects.HARM), 1, 0)
     );
+
+    public static void register(IEventBus modEventBus) {
+        ITEMS.register(modEventBus);
+    }
 }

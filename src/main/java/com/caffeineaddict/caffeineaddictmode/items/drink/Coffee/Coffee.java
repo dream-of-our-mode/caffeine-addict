@@ -1,5 +1,6 @@
-package com.caffeineaddict.caffeineaddictmode.drink;
+package com.caffeineaddict.caffeineaddictmode.items.drink.Coffee;
 
+import com.caffeineaddict.caffeineaddictmode.items.drink.Drink;
 import java.util.List;
 import javax.annotation.Nullable;
 import net.minecraft.nbt.CompoundTag;

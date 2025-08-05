@@ -1,6 +1,6 @@
-package com.caffeineaddict.caffeineaddictmode.block.entity;
+package com.caffeineaddict.caffeineaddictmode.blocks.WaterDispenser;
 
-import com.caffeineaddict.caffeineaddictmode.ModItems;
+import com.caffeineaddict.caffeineaddictmode.registry.ModItems;
 import com.caffeineaddict.caffeineaddictmode.registry.ModBlockEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
