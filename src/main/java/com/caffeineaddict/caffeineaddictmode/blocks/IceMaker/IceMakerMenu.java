@@ -2,6 +2,7 @@ package com.caffeineaddict.caffeineaddictmode.blocks.IceMaker;
 
 import com.caffeineaddict.caffeineaddictmode.registry.ModItems;
 
+import com.caffeineaddict.caffeineaddictmode.registry.ModMenus;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -22,7 +23,7 @@ public class IceMakerMenu extends AbstractContainerMenu {
     }
 
     public IceMakerMenu(int id, Inventory playerInv, IceMakerBlockEntity blockEntity) {
-        super(ModMenuTypes.ICE_MAKER_MENU.get(), id);
+        super(ModMenus.ICE_MAKER_MENU.get(), id);
         this.icemakerblockEntity = blockEntity;
         this.level = playerInv.player.level;
         this.data = blockEntity.getContainerData();

@@ -1,5 +1,6 @@
 package com.caffeineaddict.caffeineaddictmode.blocks.CoffeeMachine;
 
+import com.caffeineaddict.caffeineaddictmode.registry.ModBlockEntities;
 import javax.annotation.Nullable;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;

@@ -1,5 +1,6 @@
 package com.caffeineaddict.caffeineaddictmode.blocks.CoffeeMachine;
 
+import com.caffeineaddict.caffeineaddictmode.registry.ModMenus;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.Container;
@@ -23,7 +24,7 @@ public class CoffeeMachineMenu extends AbstractContainerMenu {
     }
 
     public CoffeeMachineMenu(int id, Inventory playerInv, BlockPos pos, Container blockInv, ContainerData gaugeData) {
-        super(ModMenuTypes.COFFEE_MACHINE_MENU.get(), id);
+        super(ModMenus.COFFEE_MACHINE_MENU.get(), id);
         this.access = ContainerLevelAccess.create(playerInv.player.level, pos);
         this.blockInv = blockInv;
         this.gaugeData = gaugeData;

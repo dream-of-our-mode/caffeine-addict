@@ -1,5 +1,6 @@
 package com.caffeineaddict.caffeineaddictmode.blocks.CoffeeMachine;
 
+import com.caffeineaddict.caffeineaddictmode.registry.ModBlockEntities;
 import com.caffeineaddict.caffeineaddictmode.registry.ModItems;
 import com.caffeineaddict.caffeineaddictmode.TagNSpecialConstant;
 import net.minecraft.core.BlockPos;

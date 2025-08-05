@@ -1,5 +1,6 @@
 package com.caffeineaddict.caffeineaddictmode.blocks.Grinder;
 
+import com.caffeineaddict.caffeineaddictmode.registry.ModMenus;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -20,7 +21,7 @@ public class GrinderMenu extends AbstractContainerMenu {
     }
 
     public GrinderMenu(int id, Inventory playerInv, GrinderBlockEntity blockEntity) {
-        super(ModMenuTypes.GRINDER_MENU.get(), id);
+        super(ModMenus.GRINDER_MENU.get(), id);
         this.blockEntity = blockEntity;
         this.level = playerInv.player.level;
         this.data = blockEntity.getContainerData();
