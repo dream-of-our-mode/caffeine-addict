@@ -1,20 +1,16 @@
 package com.caffeineaddict.caffeineaddictmode;
 
-import com.caffeineaddict.caffeineaddictmode.CaffeineAddictMode;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.Item;
+import net.minecraftforge.eventbus.api.IEventBus;
 import com.caffeineaddict.caffeineaddictmode.drink.Coffee;
 import com.caffeineaddict.caffeineaddictmode.drink.Drink;
 import com.caffeineaddict.caffeineaddictmode.drink.dto.EffectDto;
 import java.util.List;
-import net.minecraft.world.effect.MobEffect;
-import net.minecraft.world.item.CreativeModeTab;
 import com.caffeineaddict.caffeineaddictmode.registry.ModBlocks;
-import net.minecraft.world.effect.MobEffectInstance;
+import com.caffeineaddict.caffeineaddictmode.drink.Tea;
+
 import net.minecraft.world.effect.MobEffects;
-import net.minecraft.world.food.FoodProperties;
-import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.BlockItem;
-import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -26,15 +22,26 @@ public class ModItems {
     public static final DeferredRegister<Item> ITEMS =
             DeferredRegister.create(ForgeRegistries.ITEMS, MOD_ID);
 
-    public static final RegistryObject<Item> PLACEHOLDER_ITEM = ITEMS.register(
-            "placeholder_item",
-            () -> new Item(new Item.Properties().tab(ModCreativeTab.CAFFEINE_TAB))
-    );
+    public static final RegistryObject<Item> COFFEE_MACHINE_ITEM =
+            ModItems.ITEMS.register("coffee_machine", () ->
+                    new BlockItem(ModBlocks.COFFEE_MACHINE_BLOCK.get(), new Item.Properties().tab(ModCreativeTab.CAFFEINE_TAB)));
 
     public static final RegistryObject<Item> GROUND_COFFEE =
             ITEMS.register("ground_coffee", () ->
                     new Item(new Item.Properties().tab(ModCreativeTab.CAFFEINE_TAB)));
 
+    public static final RegistryObject<Item> SHOT_CUP =
+            ITEMS.register("shot_cup", () ->
+                    new Item(new Item.Properties().stacksTo(16).tab(ModCreativeTab.CAFFEINE_TAB)));
+
+    public static RegistryObject<Item> getCoffeeMachine(){
+        return COFFEE_MACHINE_ITEM;
+    }
+
+    public static void register(IEventBus modEventBus) {
+        ITEMS.register(modEventBus);
+    }
+  
     public static final RegistryObject<Item> GRINDER_ITEM =
             ModItems.ITEMS.register("grinder", () ->
                     new BlockItem(ModBlocks.GRINDER_BLOCK.get(), new Item.Properties().tab(ModCreativeTab.CAFFEINE_TAB))
@@ -146,6 +153,89 @@ public class ModItems {
                     new BlockItem(ModBlocks.WATER_DISPENSER.get(),
                             new Item.Properties().tab(ModCreativeTab.CAFFEINE_TAB))
             );
+
+    public static final RegistryObject<Item> ICE_MAKER =
+            ModItems.ITEMS.register("ice_maker", () ->
+                    new BlockItem(ModBlocks.ICE_MAKER.get(), new Item.Properties().tab(ModCreativeTab.CAFFEINE_TAB))
+            );
+
+    /**
+     * dried tea leaf
+     */
+    public static final RegistryObject<Item> DRIED_DANDELION_LEAF =
+            ITEMS.register("dried_dandelion_leaf", () ->
+                    new Item(new Item.Properties().tab(ModCreativeTab.TEA_TAB)));
+
+    public static final RegistryObject<Item> DRIED_ALLIUM_LEAF =
+            ITEMS.register("dried_allium_leaf", () ->
+                    new Item(new Item.Properties().tab(ModCreativeTab.TEA_TAB)));
+
+    public static final RegistryObject<Item> DRIED_AZURE_BLUET_LEAF =
+            ITEMS.register("dried_azure_bluet_leaf", () ->
+                    new Item(new Item.Properties().tab(ModCreativeTab.TEA_TAB)));
+
+    public static final RegistryObject<Item> DRIED_CORNFLOWER_LEAF =
+            ITEMS.register("dried_cornflower_leaf", () ->
+                    new Item(new Item.Properties().tab(ModCreativeTab.TEA_TAB)));
+
+    public static final RegistryObject<Item> DRIED_POPPY_LEAF =
+            ITEMS.register("dried_poppy_leaf", () ->
+                    new Item(new Item.Properties().tab(ModCreativeTab.TEA_TAB)));
+
+    public static final RegistryObject<Item> DRIED_WITHER_ROSE_LEAF =
+            ITEMS.register("dried_wither_rose_leaf", () ->
+                    new Item(new Item.Properties().tab(ModCreativeTab.TEA_TAB)));
+
+    public static final RegistryObject<Item> DRIED_FERN_LEAF =
+            ITEMS.register("dried_fern_leaf", () ->
+                    new Item(new Item.Properties().tab(ModCreativeTab.TEA_TAB)));
+
+    public static final RegistryObject<Item> DRIED_WARPED_ROOTS_LEAF =
+            ITEMS.register("dried_warped_roots_leaf", () ->
+                    new Item(new Item.Properties().tab(ModCreativeTab.TEA_TAB)));
+
+    /**
+     * tea
+     */
+    public static final RegistryObject<Item> DANDELION_TEA = ITEMS.register(
+            "dandelion_tea",
+            () -> new Tea(List.of(MobEffects.DIG_SLOWDOWN), 20, 0)
+    );
+
+    public static final RegistryObject<Item> POPPY_TEA = ITEMS.register(
+            "poppy_tea",
+            () -> new Tea(List.of(MobEffects.CONFUSION), 10, 0)
+    );
+
+    public static final RegistryObject<Item> ALLIUM_TEA = ITEMS.register(
+            "allium_tea",
+            () -> new Tea(List.of(MobEffects.WEAKNESS), 20, 0)
+    );
+
+    public static final RegistryObject<Item> AZURE_BLUET_TEA = ITEMS.register(
+            "azure_bluet_tea",
+            () -> new Tea(List.of(MobEffects.BLINDNESS), 10, 0)
+    );
+
+    public static final RegistryObject<Item> CORNFLOWER_TEA = ITEMS.register(
+            "cornflower_tea", // 효과 부여 음수로 안된대서 일단 구속 걸어놨어요
+            () -> new Tea(List.of(MobEffects.MOVEMENT_SLOWDOWN), 10, 0)
+    );
+
+    public static final RegistryObject<Item> WITHER_ROSE_TEA = ITEMS.register(
+            "wither_rose_tea",
+            () -> new Tea(List.of(MobEffects.WITHER), 10, 0)
+    );
+
+    public static final RegistryObject<Item> FERN_TEA = ITEMS.register(
+            "fern_tea",
+            () -> new Tea(List.of(MobEffects.POISON), 10, 0)
+    );
+
+    public static final RegistryObject<Item> WARPED_ROOTS_TEA = ITEMS.register(
+            "warped_roots_tea",
+            () -> new Tea(List.of(MobEffects.HARM), 1, 0)
+    );
 
     public static void register() {
         ITEMS.register(FMLJavaModLoadingContext.get().getModEventBus());

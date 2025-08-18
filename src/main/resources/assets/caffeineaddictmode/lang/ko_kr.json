@@ -2,6 +2,8 @@
   "itemGroup.caffeinemodetab": "카페인 중독 모드",
   "advancement.caffeineaddictmode.entering_server.title": "서버 입장",
   "advancement.caffeineaddictmode.entering_server.desc": "서버에 들어오는 것이 카페인 중독의 시작입니다.",
+  "tooltip.caffeineaddictmode.quality_desc": "등급 : %s",
+  "tooltip.caffeineaddictmode.barista_desc": "바리스타 : %s"
   "item.caffeineaddictmode.coffee_bean": "커피콩",
   "item.caffeineaddictmode.roasted_coffee_bean": "볶은 커피콩",
   "item.caffeineaddictmode.coffee_powder": "커피 가루",
