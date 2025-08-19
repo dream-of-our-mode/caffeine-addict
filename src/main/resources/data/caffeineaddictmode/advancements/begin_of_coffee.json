@@ -6,7 +6,8 @@
     "frame": "task",
     "show_toast": true,
     "announce_to_chat": true,
-    "hidden": false
+    "hidden": false,
+    "background": "minecraft:textures/block/white_concrete.png"
   },
   "criteria": {
     "has_coffee_bean": {

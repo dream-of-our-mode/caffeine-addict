@@ -7,8 +7,7 @@
     "frame": "goal",
     "show_toast": true,
     "announce_to_chat": true,
-    "hidden": false,
-    "background": "minecraft:textures/gui/advancements/backgrounds/stone.png"
+    "hidden": false
   },
   "criteria": {
     "has_espresso":          { "trigger": "minecraft:inventory_changed", "conditions": { "items": [{ "items": ["caffeineaddictmode:espresso"] }] } },
