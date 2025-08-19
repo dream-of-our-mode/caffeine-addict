@@ -2,6 +2,7 @@ package com.caffeineaddict.caffeineaddictmode.drink;
 
 import com.caffeineaddict.caffeineaddictmode.ModCreativeTab;
 import com.caffeineaddict.caffeineaddictmode.ModItems;
+import com.caffeineaddict.caffeineaddictmode.drink.dto.EffectDto;
 import java.util.ArrayList;
 import java.util.List;
 import net.minecraft.world.effect.MobEffect;
@@ -47,7 +48,7 @@ public class Tea extends Drink {
     public Tea(List<MobEffect> goodEffects, int goodDuration, int goodAmplifier,
                List<MobEffect> badEffects, int badDuration, int badAmplifier) {
         // nutrition=1, saturation=0.3 고정
-        super(1, 0.3F, goodEffects, goodDuration, goodAmplifier);
+        super(1, 0.3F, List.of(new EffectDto(goodEffects.get(0), goodDuration)), goodAmplifier);
         this.badEffects = List.copyOf(badEffects);
         this.badDuration = badDuration;
         this.badAmplifier = badAmplifier;

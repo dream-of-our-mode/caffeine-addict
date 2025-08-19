@@ -163,76 +163,76 @@ public class ModItems {
      * dried tea leaf
      */
     public static final RegistryObject<Item> DRIED_DANDELION_LEAF =
-            ITEMS.register("dried_dandelion_leaf", () ->
+            ModItems.ITEMS.register("dried_dandelion_leaf", () ->
                     new Item(new Item.Properties().tab(ModCreativeTab.TEA_TAB)));
 
     public static final RegistryObject<Item> DRIED_ALLIUM_LEAF =
-            ITEMS.register("dried_allium_leaf", () ->
+            ModItems.ITEMS.register("dried_allium_leaf", () ->
                     new Item(new Item.Properties().tab(ModCreativeTab.TEA_TAB)));
 
     public static final RegistryObject<Item> DRIED_AZURE_BLUET_LEAF =
-            ITEMS.register("dried_azure_bluet_leaf", () ->
+            ModItems.ITEMS.register("dried_azure_bluet_leaf", () ->
                     new Item(new Item.Properties().tab(ModCreativeTab.TEA_TAB)));
 
     public static final RegistryObject<Item> DRIED_CORNFLOWER_LEAF =
-            ITEMS.register("dried_cornflower_leaf", () ->
+            ModItems.ITEMS.register("dried_cornflower_leaf", () ->
                     new Item(new Item.Properties().tab(ModCreativeTab.TEA_TAB)));
 
     public static final RegistryObject<Item> DRIED_POPPY_LEAF =
-            ITEMS.register("dried_poppy_leaf", () ->
+            ModItems.ITEMS.register("dried_poppy_leaf", () ->
                     new Item(new Item.Properties().tab(ModCreativeTab.TEA_TAB)));
 
     public static final RegistryObject<Item> DRIED_WITHER_ROSE_LEAF =
-            ITEMS.register("dried_wither_rose_leaf", () ->
+            ModItems.ITEMS.register("dried_wither_rose_leaf", () ->
                     new Item(new Item.Properties().tab(ModCreativeTab.TEA_TAB)));
 
     public static final RegistryObject<Item> DRIED_FERN_LEAF =
-            ITEMS.register("dried_fern_leaf", () ->
+            ModItems.ITEMS.register("dried_fern_leaf", () ->
                     new Item(new Item.Properties().tab(ModCreativeTab.TEA_TAB)));
 
     public static final RegistryObject<Item> DRIED_WARPED_ROOTS_LEAF =
-            ITEMS.register("dried_warped_roots_leaf", () ->
+            ModItems.ITEMS.register("dried_warped_roots_leaf", () ->
                     new Item(new Item.Properties().tab(ModCreativeTab.TEA_TAB)));
 
     /**
      * tea
      */
-    public static final RegistryObject<Item> DANDELION_TEA = ITEMS.register(
+    public static final RegistryObject<Item> DANDELION_TEA = ModItems.ITEMS.register(
             "dandelion_tea",
             () -> new Tea(List.of(MobEffects.DIG_SLOWDOWN), 20, 0)
     );
 
-    public static final RegistryObject<Item> POPPY_TEA = ITEMS.register(
+    public static final RegistryObject<Item> POPPY_TEA = ModItems.ITEMS.register(
             "poppy_tea",
             () -> new Tea(List.of(MobEffects.CONFUSION), 10, 0)
     );
 
-    public static final RegistryObject<Item> ALLIUM_TEA = ITEMS.register(
+    public static final RegistryObject<Item> ALLIUM_TEA = ModItems.ITEMS.register(
             "allium_tea",
             () -> new Tea(List.of(MobEffects.WEAKNESS), 20, 0)
     );
 
-    public static final RegistryObject<Item> AZURE_BLUET_TEA = ITEMS.register(
+    public static final RegistryObject<Item> AZURE_BLUET_TEA = ModItems.ITEMS.register(
             "azure_bluet_tea",
             () -> new Tea(List.of(MobEffects.BLINDNESS), 10, 0)
     );
 
-    public static final RegistryObject<Item> CORNFLOWER_TEA = ITEMS.register(
+    public static final RegistryObject<Item> CORNFLOWER_TEA = ModItems.ITEMS.register(
             "cornflower_tea", // 효과 부여 음수로 안된대서 일단 구속 걸어놨어요
             () -> new Tea(List.of(MobEffects.MOVEMENT_SLOWDOWN), 10, 0)
     );
 
-    public static final RegistryObject<Item> WITHER_ROSE_TEA = ITEMS.register(
+    public static final RegistryObject<Item> WITHER_ROSE_TEA = ModItems.ITEMS.register(
             "wither_rose_tea",
             () -> new Tea(List.of(MobEffects.WITHER), 10, 0)
     );
 
-    public static final RegistryObject<Item> FERN_TEA = ITEMS.register(
+    public static final RegistryObject<Item> FERN_TEA = ModItems.ITEMS.register(
             "fern_tea",
             () -> new Tea(List.of(MobEffects.POISON), 10, 0)
     );
 
-    public static final RegistryObject<Item> WARPED_ROOTS_TEA = ITEMS.register(
+    public static final RegistryObject<Item> WARPED_ROOTS_TEA = ModItems.ITEMS.register(
             "warped_roots_tea",
             () -> new Tea(List.of(MobEffects.HARM), 1, 0)
     );
