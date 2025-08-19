@@ -1,6 +1,6 @@
 {
-  "parent": "minecraft:block/crop",
+  "parent": "minecraft:block/cross",
   "textures": {
-    "crop": "minecraft:block/potatoes_stage7"
+    "cross": "caffeineaddictmode:block/coffee_bush_stage3"
   }
 }
