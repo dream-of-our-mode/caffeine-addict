@@ -1,7 +1,6 @@
 package com.caffeineaddict.caffeineaddictmode;
 
 import com.caffeineaddict.caffeineaddictmode.blocks.CoffeeMachine.CoffeeMachineScreen;
-import com.caffeineaddict.caffeineaddictmode.blocks.IceMaker.network.PacketHandler;
 import com.caffeineaddict.caffeineaddictmode.registry.ModBlockEntities;
 import com.caffeineaddict.caffeineaddictmode.registry.ModBlocks;
 import com.caffeineaddict.caffeineaddictmode.registry.ModItems;
@@ -19,7 +18,6 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
-import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.slf4j.Logger;
 
@@ -38,13 +36,8 @@ public class CaffeineAddictMode {
         ModSoundEvents.register(modEventBus);
 
         FMLJavaModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, Config.SPEC);
-        
-        modEventBus.addListener(this::commonSetup);
-        MinecraftForge.EVENT_BUS.register(this);
-    }
 
-    private void commonSetup(final FMLCommonSetupEvent event) {
-        event.enqueueWork(PacketHandler::register);
+        MinecraftForge.EVENT_BUS.register(this);
     }
   
     @Mod.EventBusSubscriber(modid = CaffeineAddictMode.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)

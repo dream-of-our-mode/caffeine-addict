@@ -103,7 +103,7 @@ public class CoffeeMachineBlockEntity extends BlockEntity implements MenuProvide
             for (int i = 0; i < 2; i++) {
                 ItemStack input = inventory.getItem(i);
                 ItemStack output = inventory.getItem(i+2);
-                if (input.is(ModItems.GROUND_COFFEE.get()) && output.is(ModItems.SHOT_CUP.get())) {
+                if (input.is(ModItems.COFFEE_POWDER.get()) && output.is(ModItems.SHOT_CUP.get())) {
                     int progress = gauges.get(i);
                     //####################################################
                     //여기에 게이지 움직임에 따른 커피 퀄리티 결정 로직으로 바꿔야함

@@ -27,10 +27,6 @@ public class ModItems {
             ModItems.ITEMS.register("coffee_machine", () ->
                     new BlockItem(COFFEE_MACHINE_BLOCK.get(), new Item.Properties().tab(ModCreativeTab.CAFFEINE_TAB)));
 
-    public static final RegistryObject<Item> GROUND_COFFEE =
-            ITEMS.register("ground_coffee", () ->
-                    new Item(new Item.Properties().tab(ModCreativeTab.CAFFEINE_TAB)));
-
     public static final RegistryObject<Item> SHOT_CUP =
             ITEMS.register("shot_cup", () ->
                     new Item(new Item.Properties().stacksTo(16).tab(ModCreativeTab.CAFFEINE_TAB)));
@@ -87,11 +83,6 @@ public class ModItems {
     public static final RegistryObject<Item> ESPRESSO = ITEMS.register(
             "espresso",
             () -> new Coffee(1, 1, List.of(MobEffects.MOVEMENT_SPEED), 15, 0)
-    );
-
-    public static final RegistryObject<Item> ICE_WATER = ITEMS.register(
-            "ice_water",
-            () -> new Drink(1, 1, List.of(MobEffects.MOVEMENT_SPEED), 15, 0)
     );
 
     public static final RegistryObject<Item> AMERICANO = ITEMS.register(
