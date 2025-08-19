@@ -5,6 +5,7 @@ import static com.caffeineaddict.caffeineaddictmode.registry.ModBlocks.COFFEE_MA
 import com.caffeineaddict.caffeineaddictmode.CaffeineAddictMode;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemNameBlockItem;
 import net.minecraftforge.eventbus.api.IEventBus;
 import com.caffeineaddict.caffeineaddictmode.items.drink.Coffee.Coffee;
 import com.caffeineaddict.caffeineaddictmode.items.drink.Drink;
@@ -42,7 +43,7 @@ public class ModItems {
      */
     public static final RegistryObject<Item> COFFEE_BEAN = ITEMS.register(
             "coffee_bean",
-            () -> new Item(new Item.Properties().tab(ModCreativeTab.CAFFEINE_TAB))
+            () -> new ItemNameBlockItem(ModBlocks.COFFEE_CROP.get(), new Item.Properties().tab(ModCreativeTab.CAFFEINE_TAB))
     );
 
     public static final RegistryObject<Item> ROASTED_COFFEE_BEAN = ITEMS.register(
