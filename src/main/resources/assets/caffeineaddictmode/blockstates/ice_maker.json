@@ -1,5 +1,8 @@
 {
   "variants": {
-    "": { "model": "caffeineaddictmode:block/ice_machine" }
+    "facing=north": { "model": "caffeineaddictmode:block/ice_machine" },
+    "facing=east":  { "model": "caffeineaddictmode:block/ice_machine", "y": 90 },
+    "facing=south": { "model": "caffeineaddictmode:block/ice_machine", "y": 180 },
+    "facing=west":  { "model": "caffeineaddictmode:block/ice_machine", "y": 270 }
   }
 }
