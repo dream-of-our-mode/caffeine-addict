@@ -3,10 +3,14 @@ package com.caffeineaddict.caffeineaddictmode.blocks.CoffeeMachine;
 import com.caffeineaddict.caffeineaddictmode.items.drink.Coffee.Espresso;
 import com.caffeineaddict.caffeineaddictmode.registry.ModBlockEntities;
 import com.caffeineaddict.caffeineaddictmode.registry.ModItems;
+import com.caffeineaddict.caffeineaddictmode.registry.ModSoundEvents;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.protocol.game.ClientboundStopSoundPacket;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.Container;
@@ -31,21 +35,17 @@ public class CoffeeMachineBlockEntity extends BlockEntity implements MenuProvide
     private final int STEAM_INV_SIZE = 4;
     private final Container shotInventory = new SimpleContainer(SHOT_INV_SIZE);
     private final Container steamInventory = new SimpleContainer(STEAM_INV_SIZE);
-    private final ContainerData gauges = new SimpleContainerData((SHOT_INV_SIZE+STEAM_INV_SIZE)/2);
+    private final ContainerData gauges = new SimpleContainerData((SHOT_INV_SIZE + STEAM_INV_SIZE) / 2);
     private String lastUsedBy = "";
     private final String LAST_USEDBY_KEY = "LastUsedBy";
-    private boolean extracting = false;
+
+    // 사운드 관련
+    private boolean wasWorking = false;
+    private long lastSoundGameTime = -200;
+    private static final int SOUND_COOLDOWN_TICKS = 220;
 
     public CoffeeMachineBlockEntity(BlockPos pos, BlockState state) {
         super(ModBlockEntities.COFFEE_MACHINE.get(), pos, state);
-    }
-
-    protected Container getShotContainerForRemoval(){
-        return shotInventory;
-    }
-
-    protected Container getSteamContainerForRemoval(){
-        return steamInventory;
     }
 
     public void setLastUsedBy(String playerName) {
@@ -64,10 +64,10 @@ public class CoffeeMachineBlockEntity extends BlockEntity implements MenuProvide
     @Nullable
     @Override
     public AbstractContainerMenu createMenu(int id, @NotNull Inventory playerInventory, Player player) {
-        System.out.println("Opened GUI");
         return new CoffeeMachineMenu(id, playerInventory, this.worldPosition, this.shotInventory, this.steamInventory, this.gauges);
     }
 
+    // Save data
     // Save data
     @Override
     protected void saveAdditional(CompoundTag tag) {
@@ -138,61 +138,114 @@ public class CoffeeMachineBlockEntity extends BlockEntity implements MenuProvide
     public void tick(Level level, BlockPos pos, BlockState state) {
         if (level.isClientSide) return;
 
-        processShotInventory(level);
-        processSteamInventory(level);
+        boolean anyWorking = false;
+        anyWorking |= processShotInventory(level);
+        anyWorking |= processSteamInventory(level);
+
+        // 사운드 제어
+        long now = level.getGameTime();
+        if (anyWorking) {
+            if (now - lastSoundGameTime >= SOUND_COOLDOWN_TICKS) {
+                level.playSound(null, worldPosition, ModSoundEvents.COFFEE_MACHINE_SOUND.get(),
+                        SoundSource.BLOCKS, 2.0f, 1.0f);
+                lastSoundGameTime = now;
+            }
+        } else {
+            if (wasWorking) {
+                stopCoffeeMachineSoundServer();
+                lastSoundGameTime = now - SOUND_COOLDOWN_TICKS;
+            }
+        }
+        wasWorking = anyWorking;
 
         setChanged();
     }
 
-    private void processShotInventory(Level level) {
+    private boolean processShotInventory(Level level) {
+        boolean working = false;
         for (int i = 0; i < SHOT_INV_SIZE / 2; i++) {
             ItemStack input = shotInventory.getItem(i);
             ItemStack output = shotInventory.getItem(i + (SHOT_INV_SIZE / 2));
 
             if (input.is(ModItems.COFFEE_POWDER.get()) && output.is(ModItems.SHOT_CUP.get())) {
-                handleProgress(level, i+1, gauges.get(i+1), () -> {
-                    // 진행 중: 1초마다 사운드 재생
+                working = true;
+                handleProgress(level, i + 1, gauges.get(i + 1), () -> {
                     level.playSound(null, worldPosition, SoundEvents.BREWING_STAND_BREW,
                             SoundSource.BLOCKS, 1.0f, 1.0f);
                 });
             } else {
-                gauges.set(i+1, 0);
+                gauges.set(i + 1, 0);
             }
         }
+        return working;
     }
 
-    private void processSteamInventory(Level level) {
+    private boolean processSteamInventory(Level level) {
+        boolean working = false;
         for (int j = 0; j < STEAM_INV_SIZE / 2; j++) {
             ItemStack input = steamInventory.getItem(j);
             ItemStack output = steamInventory.getItem(j + (STEAM_INV_SIZE / 2));
-            int gaugeIndex = j==0? 0 : ((SHOT_INV_SIZE+STEAM_INV_SIZE) / 2)-1;
+            int gaugeIndex = j == 0 ? 0 : ((SHOT_INV_SIZE + STEAM_INV_SIZE) / 2) - 1;
 
             if (input.is(Items.MILK_BUCKET) &&
                     (output.is(ItemStack.EMPTY.getItem()) || output.is(ModItems.STEAMED_MILK.get()))) {
 
-                handleProgress(level, gaugeIndex, gauges.get(gaugeIndex), () -> {
-                    // 여기서 사운드 재생 가능
-                });
-
+                working = true;
+                handleProgress(level, gaugeIndex, gauges.get(gaugeIndex), () -> {});
                 if (gauges.get(gaugeIndex) >= 24) {
                     steamInventory.removeItem(j, 1);
-                    //bucket을 내보내지 않으면
-                    //steamInventory.setItem(j, new ItemStack(Items.BUCKET, 1));
                     steamInventory.setItem(j + (STEAM_INV_SIZE / 2), new ItemStack(ModItems.STEAMED_MILK.get(), 1));
                 }
             }
         }
+        return working;
     }
 
-    /**
-     * 공통 게이지 진행 처리
-     */
     private void handleProgress(Level level, int index, int currentProgress, Runnable onTickSound) {
         int newProgress = (currentProgress + 1) % 25;
         gauges.set(index, newProgress);
-
         if (newProgress % 20 == 0 && newProgress != 0) {
             onTickSound.run();
         }
+    }
+
+    private void stopCoffeeMachineSoundServer() {
+        if (this.level instanceof ServerLevel server) {
+            var pkt = new ClientboundStopSoundPacket(
+                    ModSoundEvents.COFFEE_MACHINE_SOUND.get().getLocation(),
+                    SoundSource.BLOCKS
+            );
+            for (ServerPlayer p : server.players()) {
+                p.connection.send(pkt);
+            }
+        }
+    }
+
+    @Override
+    public void setRemoved() {
+        stopCoffeeMachineSoundServer();
+        super.setRemoved();
+    }
+
+    @Override
+    public void onChunkUnloaded() {
+        stopCoffeeMachineSoundServer();
+        super.onChunkUnloaded();
+    }
+
+    protected Container getShotContainerForRemoval(){
+        return shotInventory;
+    }
+
+    protected Container getSteamContainerForRemoval(){
+        return steamInventory;
+    }
+
+    public Container getShotInventory() {
+        return shotInventory;
+    }
+
+    public Container getSteamInventory() {
+        return steamInventory;
     }
 }

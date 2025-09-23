@@ -95,20 +95,9 @@ public class Espresso extends Drink {
      * 아이템 사용 후 호출
      * 빈 컵을 지급 (크리에이티브 모드일 경우 지급하지 않음)
      */
-    @Override
-    public ItemStack finishUsingItem(ItemStack stack, Level level, LivingEntity entity) {
-        ItemStack result = super.finishUsingItem(stack, level, entity);
-        if (!level.isClientSide) {
-            createEffectInstances(stack).forEach(entity::addEffect);
 
-            if (entity instanceof Player player && !player.getAbilities().instabuild) {
-                ItemStack drop = new ItemStack(ModItems.SHOT_CUP.get());
-                if (!player.getInventory().add(drop)) {
-                    player.drop(drop, false);
-                }
-            }
-        }
-        return result;
+    protected ItemStack getEmptyCupItem() {
+        return new ItemStack(ModItems.SHOT_CUP.get());
     }
 
     @Override

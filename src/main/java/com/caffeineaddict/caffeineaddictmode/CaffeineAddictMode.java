@@ -9,15 +9,14 @@ import com.caffeineaddict.caffeineaddictmode.registry.ModItems;
 import com.caffeineaddict.caffeineaddictmode.registry.ModMenus;
 import com.caffeineaddict.caffeineaddictmode.registry.ModNetwork;
 import com.caffeineaddict.caffeineaddictmode.registry.ModSoundEvents;
+
 import com.caffeineaddict.caffeineaddictmode.blocks.Grinder.GrinderScreen;
 import com.caffeineaddict.caffeineaddictmode.blocks.IceMaker.IceMakerScreen;
 
-import java.nio.charset.StandardCharsets;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.world.item.Items;
 import net.minecraftforge.api.distmarker.Dist;
 import com.mojang.logging.LogUtils;
 import net.minecraftforge.common.MinecraftForge;

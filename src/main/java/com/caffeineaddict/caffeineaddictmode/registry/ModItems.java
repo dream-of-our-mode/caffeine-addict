@@ -1,8 +1,5 @@
 package com.caffeineaddict.caffeineaddictmode.registry;
 
-import static com.caffeineaddict.caffeineaddictmode.registry.ModBlocks.COFFEE_MACHINE_BLOCK;
-import static org.lwjgl.system.linux.X11.True;
-
 import com.caffeineaddict.caffeineaddictmode.CaffeineAddictMode;
 import com.caffeineaddict.caffeineaddictmode.items.drink.Coffee.Espresso;
 import com.caffeineaddict.caffeineaddictmode.items.drink.DrinkState;
@@ -12,9 +9,9 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemNameBlockItem;
 import net.minecraftforge.eventbus.api.IEventBus;
 import com.caffeineaddict.caffeineaddictmode.items.drink.Coffee.Coffee;
-import com.caffeineaddict.caffeineaddictmode.items.drink.Drink;
 import java.util.List;
 import com.caffeineaddict.caffeineaddictmode.items.drink.Tea.Tea;
+
 import net.minecraft.world.effect.MobEffects;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -29,11 +26,21 @@ public class ModItems {
 
     public static final RegistryObject<Item> COFFEE_MACHINE_ITEM =
             ModItems.ITEMS.register("coffee_machine", () ->
-                    new BlockItem(COFFEE_MACHINE_BLOCK.get(), new Item.Properties().tab(ModCreativeTab.CAFFEINE_TAB)));
+                    new BlockItem(ModBlocks.COFFEE_MACHINE.get(), new Item.Properties().tab(ModCreativeTab.CAFFEINE_TAB)));
 
     public static RegistryObject<Item> getCoffeeMachine(){
         return COFFEE_MACHINE_ITEM;
     }
+
+    public static final RegistryObject<Item> GRINDER_ITEM =
+            ModItems.ITEMS.register("grinder", () ->
+                    new BlockItem(ModBlocks.GRINDER_BLOCK.get(), new Item.Properties().tab(ModCreativeTab.CAFFEINE_TAB))
+            );
+
+    public static final RegistryObject<Item> STEAMER =
+            ITEMS.register("steamer", () ->
+                    new Item(new Item.Properties().stacksTo(16).tab(ModCreativeTab.CAFFEINE_TAB)));
+
     /**
      * Ingredients
      */
@@ -95,11 +102,6 @@ public class ModItems {
             () -> new Espresso(1, 1, List.of(MobEffects.MOVEMENT_SPEED), 15, 0, DrinkState.HOT)
     );
 
-//    public static final RegistryObject<Item> ICE_WATER = ITEMS.register(
-//            "ice_water",
-//            () -> new Drink(1, 1, List.of(MobEffects.MOVEMENT_SPEED), 15, 0, DrinkState.COLD)
-//    );
-
     public static final RegistryObject<Item> AMERICANO = ITEMS.register(
             "americano",
             () -> new Coffee(1, 1, List.of(MobEffects.MOVEMENT_SPEED), 15, 0, DrinkState.HOT)
@@ -129,20 +131,8 @@ public class ModItems {
                             new Item.Properties().tab(ModCreativeTab.CAFFEINE_TAB))
             );
 
-    //    public static RegistryObject<Item> getGrinderItem() {
-//        return ModBlocks.GRINDER_ITEM;
-//    }
-    public static final RegistryObject<Item> GRINDER_ITEM =
-            ITEMS.register("grinder", () ->
-                    new BlockItem(ModBlocks.GRINDER_BLOCK.get(), new Item.Properties().tab(ModCreativeTab.CAFFEINE_TAB))
-            );
-
     public static final RegistryObject<Item> SHOT_MACHINE =
             ITEMS.register("shot_machine", () ->
-                    new Item(new Item.Properties().stacksTo(16).tab(ModCreativeTab.CAFFEINE_TAB)));
-
-    public static final RegistryObject<Item> STEAMER =
-            ITEMS.register("steamer", () ->
                     new Item(new Item.Properties().stacksTo(16).tab(ModCreativeTab.CAFFEINE_TAB)));
 
     public static final RegistryObject<Item> ICE_MAKER =

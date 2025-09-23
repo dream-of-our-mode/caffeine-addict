@@ -1,3 +1,6 @@
 {
-  "parent": "caffeineaddictmode:block/coffee_machine"
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "caffeineaddictmode:item/coffee_machine"
+  }
 }

@@ -12,12 +12,17 @@ public class ModSoundEvents {
     public static final DeferredRegister<SoundEvent> SOUNDS =
             DeferredRegister.create(ForgeRegistries.SOUND_EVENTS, CaffeineAddictMode.MOD_ID);
 
-    public static final RegistryObject<SoundEvent> GRINDER_SOUND =
-            SOUNDS.register("block.grinder",
-                    () -> new SoundEvent(new ResourceLocation(CaffeineAddictMode.MOD_ID, "block.grinder")));
+    // 공통 등록 유틸
+    private static RegistryObject<SoundEvent> registerSound(String id) {
+        return SOUNDS.register(id,
+                () -> new SoundEvent(new ResourceLocation(CaffeineAddictMode.MOD_ID, id)));
+    }
 
     public static void register(IEventBus eventBus) {
         SOUNDS.register(eventBus);
     }
 
+    public static final RegistryObject<SoundEvent> GRINDER_SOUND         = registerSound("block.grinder");
+    public static final RegistryObject<SoundEvent> ICE_MAKER_SOUND       = registerSound("block.ice_maker");
+    public static final RegistryObject<SoundEvent> COFFEE_MACHINE_SOUND = registerSound("block.coffee_machine");
 }

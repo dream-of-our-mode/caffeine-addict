@@ -69,8 +69,7 @@ public class Drink extends Item {
             createEffectInstances(stack).forEach(entity::addEffect);
 
             if (entity instanceof Player player && !player.getAbilities().instabuild) {
-                //ItemStack drop = drinkState==DrinkState.HOT? new ItemStack(ModItems.MUG_CUP.get()) : new ItemStack(ModItems.GLASS_CUP.get());
-                ItemStack drop = new ItemStack(ModItems.CUP.get());
+                ItemStack drop = new ItemStack(ModItems.SHOT_CUP.get());
                 if (!player.getInventory().add(drop)) {
                     player.drop(drop, false);
                 }
@@ -96,6 +95,10 @@ public class Drink extends Item {
 
     public void setAmplifier(int amplifier) {
         this.amplifier = amplifier;
+    }
+
+    protected ItemStack getEmptyCupItem() {
+        return new ItemStack(ModItems.CUP.get());
     }
 }
 

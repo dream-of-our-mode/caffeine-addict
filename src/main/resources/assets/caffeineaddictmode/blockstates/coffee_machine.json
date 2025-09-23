@@ -1,5 +1,8 @@
 {
   "variants": {
-    "": { "model": "caffeineaddictmode:block/coffee_machine_block" }
+    "facing=north": { "model": "caffeineaddictmode:block/espresso_machine_l" },
+    "facing=east":  { "model": "caffeineaddictmode:block/espresso_machine_l", "y": 90 },
+    "facing=south": { "model": "caffeineaddictmode:block/espresso_machine_l", "y": 180 },
+    "facing=west":  { "model": "caffeineaddictmode:block/espresso_machine_l", "y": 270 }
   }
 }

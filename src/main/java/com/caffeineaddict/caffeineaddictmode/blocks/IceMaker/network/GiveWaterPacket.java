@@ -30,7 +30,7 @@ public class GiveWaterPacket {
         ctx.get().enqueueWork(() -> {
             ServerPlayer player = ctx.get().getSender();
             if (player != null) {
-                ItemStack water = new ItemStack(msg.isHot ? ModItems.HOT_WATER.get() : ModItems.ICE_WATER.get());
+                ItemStack water = new ItemStack(msg.isHot ? ModItems.HOT_WATER.get() : ModItems.COOL_WATER.get());
                 player.addItem(water);
             }
         });
